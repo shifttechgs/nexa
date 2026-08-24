@@ -10,13 +10,14 @@
         <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Oswald:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
+    <body class="font-sans text-nexa-ink antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-10 sm:pt-0 bg-nexa-navy">
             <div>
                 <a href="/">
@@ -24,11 +25,11 @@
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-8 px-6 py-8 bg-white shadow-xl overflow-hidden sm:rounded-2xl border-t-4 border-nexa-green">
+            <div class="w-full sm:max-w-md mt-8 px-6 py-8 bg-white border-t-2 border-nexa-green">
                 {{ $slot }}
             </div>
 
-            <p class="mt-8 mb-10 text-xs text-white/50 tracking-wide">
+            <p class="mt-8 mb-10 font-mono text-[11px] uppercase tracking-widest text-white/35">
                 &copy; {{ date('Y') }} Nexa Mining and Engineering Services &mdash; Lubumbashi, DRC
             </p>
         </div>

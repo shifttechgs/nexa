@@ -12,18 +12,26 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['"IBM Plex Sans"', ...defaultTheme.fontFamily.sans],
+                display: ['Archivo', ...defaultTheme.fontFamily.sans],
+                label: ['Oswald', ...defaultTheme.fontFamily.sans],
+                mono: ['"IBM Plex Mono"', ...defaultTheme.fontFamily.mono],
             },
             colors: {
+                // 60 / 20 / 10 brand system, taken from the Nexa logo:
+                // paper (white) is dominant, navy is structural/secondary, green is the sole accent.
                 nexa: {
+                    paper: '#FFFFFF',
+                    ink: '#0B2340',
                     navy: '#0B2340',
                     'navy-dark': '#071A30',
                     green: '#1E7A3C',
                     'green-dark': '#155A2C',
-                    gold: '#C89B3C',
-                    red: '#B3261E',
-                    slate: '#4A5A6A',
+                    red: '#B3241C',
                 },
+            },
+            backgroundImage: {
+                'brand-stripes': 'repeating-linear-gradient(135deg, #1E7A3C 0, #1E7A3C 14px, #0B2340 14px, #0B2340 28px)',
             },
         },
     },

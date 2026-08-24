@@ -20,5 +20,9 @@
     },
     "optionalDependencies": {
         "@laravel/multiplex": "^0.4.1"
+    },
+    "dependencies": {
+        "@alpinejs/collapse": "^3.16.2",
+        "@alpinejs/intersect": "^3.16.2"
     }
 }
