@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\QuoteRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -12,7 +11,7 @@ class QuoteRequestController extends Controller
     public function store(Request $request): RedirectResponse
     {
         try {
-            $validated = $request->validate([
+            $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'company' => ['nullable', 'string', 'max:255'],
                 'email' => ['required', 'email', 'max:255'],
@@ -23,8 +22,6 @@ class QuoteRequestController extends Controller
         } catch (ValidationException $e) {
             throw $e->redirectTo(route('home').'#contact');
         }
-
-        QuoteRequest::create($validated);
 
         return redirect(route('home').'#contact')->with('status', 'quote-request-sent');
     }

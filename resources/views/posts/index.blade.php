@@ -33,10 +33,6 @@
                         </a>
                     @endforeach
                 </div>
-
-                <div class="mt-12">
-                    {{ $posts->links() }}
-                </div>
             @endif
         </div>
     </section>

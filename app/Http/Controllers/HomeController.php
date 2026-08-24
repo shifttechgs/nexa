@@ -10,11 +10,11 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $latestPosts = Post::published()->latest('published_at')->take(3)->get();
+        $latestPosts = Post::all()->take(3);
 
         $featuredProducts = Product::all();
 
-        $testimonials = Testimonial::published()->orderBy('sort')->get();
+        $testimonials = Testimonial::all();
 
         return view('home', compact('latestPosts', 'featuredProducts', 'testimonials'));
     }

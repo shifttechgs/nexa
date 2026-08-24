@@ -2,31 +2,44 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
-class Testimonial extends Model
+/**
+ * Sample client testimonials for this demo site — hardcoded, no database table.
+ * These are placeholders, not real client quotes; swap the content for actual
+ * client words when they're available.
+ */
+class Testimonial
 {
-    protected $fillable = [
-        'quote',
-        'name',
-        'title',
-        'company',
-        'is_placeholder',
-        'published',
-        'sort',
-    ];
-
-    protected function casts(): array
-    {
-        return [
-            'is_placeholder' => 'boolean',
-            'published' => 'boolean',
-        ];
+    public function __construct(
+        public string $quote,
+        public string $name,
+        public ?string $title = null,
+        public ?string $company = null,
+    ) {
     }
 
-    public function scopePublished(Builder $query): void
+    public static function all(): Collection
     {
-        $query->where('published', true);
+        return collect([
+            new self(
+                quote: '[Placeholder — replace with a real quote from a client about delivery reliability: did their order arrive on time and in full?]',
+                name: 'Client Name',
+                title: 'Job Title',
+                company: 'Company Name',
+            ),
+            new self(
+                quote: '[Placeholder — replace with a real quote about product or safety performance: how did our supplies hold up on site?]',
+                name: 'Client Name',
+                title: 'Job Title',
+                company: 'Company Name',
+            ),
+            new self(
+                quote: '[Placeholder — replace with a real quote about responsiveness or support: how did our sales/support team handle their request?]',
+                name: 'Client Name',
+                title: 'Job Title',
+                company: 'Company Name',
+            ),
+        ]);
     }
 }

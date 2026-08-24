@@ -63,16 +63,9 @@
                         </nav>
 
                         <div class="hidden lg:flex items-center gap-5">
-                            @auth
-                                <a href="{{ route('dashboard') }}" class="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white bg-nexa-green hover:bg-nexa-navy hover:text-white transition">
-                                    Dashboard
-                                </a>
-                            @else
-                                <a href="{{ route('login') }}" class="text-sm font-medium text-nexa-ink/70 hover:text-nexa-ink transition">Log in</a>
-                                <a href="{{ route('home') }}#contact" class="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white bg-nexa-green hover:bg-nexa-navy hover:text-white transition">
-                                    Request a Quote
-                                </a>
-                            @endauth
+                            <a href="{{ route('home') }}#contact" class="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white bg-nexa-green hover:bg-nexa-navy hover:text-white transition">
+                                Request a Quote
+                            </a>
                         </div>
 
                         <!-- Mobile toggle -->
@@ -95,12 +88,7 @@
                         <a href="{{ route('posts.index') }}" class="block py-2.5 text-base font-medium text-nexa-ink/80 hover:text-nexa-ink">Insights</a>
                         <a href="{{ route('home') }}#contact" class="block py-2.5 text-base font-medium text-nexa-ink/80 hover:text-nexa-ink">Contact</a>
                         <div class="pt-3 mt-2 border-t border-nexa-ink/15 flex flex-col gap-2">
-                            @auth
-                                <a href="{{ route('dashboard') }}" class="block px-4 py-2.5 text-base font-semibold text-white bg-nexa-green text-center">Dashboard</a>
-                            @else
-                                <a href="{{ route('login') }}" class="block py-2.5 text-base font-medium text-nexa-ink/80">Log in</a>
-                                <a href="{{ route('home') }}#contact" class="block px-4 py-2.5 text-base font-semibold text-white bg-nexa-green text-center">Request a Quote</a>
-                            @endauth
+                            <a href="{{ route('home') }}#contact" class="block px-4 py-2.5 text-base font-semibold text-white bg-nexa-green text-center">Request a Quote</a>
                         </div>
                     </div>
                 </div>
