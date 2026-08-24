@@ -12,11 +12,7 @@ class HomeController extends Controller
     {
         $latestPosts = Post::published()->latest('published_at')->take(3)->get();
 
-        $featuredProducts = Product::orderBy('sort')->get()
-            ->groupBy('category')
-            ->map(fn ($items) => $items->first())
-            ->values()
-            ->take(4);
+        $featuredProducts = Product::all();
 
         $testimonials = Testimonial::published()->orderBy('sort')->get();
 

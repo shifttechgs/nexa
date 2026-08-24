@@ -8,18 +8,21 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::orderBy('sort')->get()->groupBy('category');
+        $products = Product::all()->groupBy('category');
 
         return view('products.index', compact('products'));
     }
 
-    public function show(Product $product)
+    public function show(string $product)
     {
-        $related = Product::where('category', $product->category)
-            ->where('id', '!=', $product->id)
-            ->orderBy('sort')
-            ->take(3)
-            ->get();
+        $product = Product::findBySlug($product);
+
+        abort_unless($product, 404);
+
+        $related = Product::all()
+            ->where('category', $product->category)
+            ->reject(fn (Product $item) => $item->slug === $product->slug)
+            ->take(3);
 
         return view('products.show', compact('product', 'related'));
     }

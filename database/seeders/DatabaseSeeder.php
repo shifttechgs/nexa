@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(PostSeeder::class);
-        $this->call(ProductSeeder::class);
         $this->call(TestimonialSeeder::class);
     }
 }
