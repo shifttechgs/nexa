@@ -3,42 +3,14 @@
 @endphp
 
 <footer class="bg-nexa-navy text-white/60">
-    <div class="h-2 bg-brand-stripes"></div>
-
-    <!-- Pre-footer CTA -->
-    <div class="border-b border-white/10">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row items-center justify-between gap-6 text-center lg:text-left">
-            <div>
-                <p class="font-mono text-[11px] uppercase tracking-widest text-nexa-green mb-1">Talk to Sales</p>
-                <h2 class="font-display font-bold text-xl sm:text-2xl text-white">Need pricing or availability on something specific?</h2>
-            </div>
-            <div class="flex flex-wrap items-center justify-center gap-6 shrink-0">
-                <a href="{{ route('home') }}#contact" class="group inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-nexa-green hover:bg-white hover:text-nexa-navy transition">
-                    Request a Quote
-                    <span class="inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-                </a>
-                @if ($footerWhatsapp)
-                    <a
-                        href="https://wa.me/{{ $footerWhatsapp }}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-flex items-center gap-2 text-sm font-semibold text-white/70 hover:text-white border-b border-white/30 hover:border-white pb-0.5 transition"
-                    >
-                        <svg viewBox="0 0 32 32" class="h-4 w-4 fill-current" aria-hidden="true">
-                            <path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.386.66 4.62 1.807 6.53L4 29l7.64-1.766a11.94 11.94 0 0 0 4.364.82h.005c6.627 0 12.004-5.377 12.004-12.005C28.013 8.377 22.636 3 16.004 3Zm7.03 17.017c-.297.836-1.47 1.531-2.406 1.735-.64.137-1.475.246-4.29-.92-3.6-1.492-5.914-5.147-6.096-5.386-.176-.24-1.458-1.94-1.458-3.7 0-1.76.905-2.622 1.226-2.983.32-.36.7-.45.933-.45.234 0 .467.002.671.013.216.011.505-.082.79.603.297.716.994 2.475 1.081 2.655.088.18.146.39.03.63-.117.24-.176.39-.35.6-.176.21-.37.47-.53.63-.176.176-.36.367-.155.717.204.35.905 1.494 1.943 2.42 1.335 1.19 2.462 1.559 2.813 1.734.35.176.556.147.76-.088.205-.234 1.376-1.606 1.744-2.156.37-.55.74-.457 1.24-.274.5.184 3.19 1.505 3.74 1.778.55.274.916.41 1.05.64.135.234.135 1.352-.163 2.188Z"/>
-                        </svg>
-                        WhatsApp Us
-                    </a>
-                @endif
-            </div>
-        </div>
-    </div>
+    <div class="h-1 bg-nexa-green"></div>
 
     <!-- Main grid -->
-    <div
-        class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-12 gap-10"
-        data-reveal x-data="{ shown: false }" x-intersect.once="shown = true" :class="{ 'is-revealed': shown }"
-    >
+    <div class="pt-16 pb-12">
+        <div
+            class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-10"
+            data-reveal x-data="{ shown: false }" x-intersect.once="shown = true" :class="{ 'is-revealed': shown }"
+        >
         <div class="md:col-span-5">
             <x-application-logo :transparent="true" class="h-10 w-auto" />
             <p class="mt-6 text-sm leading-relaxed max-w-sm text-white/50">
@@ -48,6 +20,26 @@
             <p class="mt-6 font-mono text-[11px] tracking-widest text-white/30 uppercase">
                 OHADA Compliant &middot; Part of Nexa Holding Group
             </p>
+
+            <div class="mt-8 flex items-center gap-3">
+                <a href="#" aria-label="Nexa on LinkedIn" class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition">
+                    <svg viewBox="0 0 448 512" class="h-4 w-4 fill-current" aria-hidden="true">
+                        <path d="M100.28 448H7.4V148.9h92.88zm-46.44-341C24.09 107 0 82.9 0 53.6a53.6 53.6 0 0 1 107.2 0c0 29.3-24.1 53.4-53.36 53.4zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.7 37.7-55.7 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.28 61.9 111.28 142.3V448z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Nexa on Facebook" class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition">
+                    <svg viewBox="0 0 320 512" class="h-4 w-4 fill-current" aria-hidden="true">
+                        <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/>
+                    </svg>
+                </a>
+                @if ($footerWhatsapp)
+                    <a href="https://wa.me/{{ $footerWhatsapp }}" target="_blank" rel="noopener noreferrer" aria-label="Nexa on WhatsApp" class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-white/60 hover:bg-white/10 hover:text-white transition">
+                        <svg viewBox="0 0 32 32" class="h-4 w-4 fill-current" aria-hidden="true">
+                            <path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.386.66 4.62 1.807 6.53L4 29l7.64-1.766a11.94 11.94 0 0 0 4.364.82h.005c6.627 0 12.004-5.377 12.004-12.005C28.013 8.377 22.636 3 16.004 3Zm7.03 17.017c-.297.836-1.47 1.531-2.406 1.735-.64.137-1.475.246-4.29-.92-3.6-1.492-5.914-5.147-6.096-5.386-.176-.24-1.458-1.94-1.458-3.7 0-1.76.905-2.622 1.226-2.983.32-.36.7-.45.933-.45.234 0 .467.002.671.013.216.011.505-.082.79.603.297.716.994 2.475 1.081 2.655.088.18.146.39.03.63-.117.24-.176.39-.35.6-.176.21-.37.47-.53.63-.176.176-.36.367-.155.717.204.35.905 1.494 1.943 2.42 1.335 1.19 2.462 1.559 2.813 1.734.35.176.556.147.76-.088.205-.234 1.376-1.606 1.744-2.156.37-.55.74-.457 1.24-.274.5.184 3.19 1.505 3.74 1.778.55.274.916.41 1.05.64.135.234.135 1.352-.163 2.188Z"/>
+                        </svg>
+                    </a>
+                @endif
+            </div>
         </div>
 
         <div class="md:col-span-2 md:col-start-6">
@@ -112,6 +104,12 @@
                 @endif
             </ul>
         </div>
+        </div>
+    </div>
+
+    <!-- Wordmark watermark -->
+    <div class="px-4 pb-4 sm:pb-6 overflow-hidden" aria-hidden="true">
+        <p class="footer-wordmark text-center text-[23vw] lg:text-[17rem]">NEXA</p>
     </div>
 
     <div class="border-t border-white/10">
