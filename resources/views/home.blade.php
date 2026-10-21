@@ -416,7 +416,7 @@
                         ['DRC', 'Lubumbashi', 'Headquarters', 'cd'],
                         ['Zambia', '—', 'Operational footprint', 'zm'],
                         ['Zimbabwe', '—', 'Operational footprint', 'zw'],
-                        ['South Africa', '—', 'Operational footprint', 'za'],
+                        ['South Africa', 'Johannesburg', 'Office', 'za'],
                     ] as [$country, $city, $status, $code])
                         <tr
                             class="border-b border-nexa-ink/10 cursor-pointer hover:bg-nexa-green/5 transition-colors duration-300"
@@ -527,6 +527,10 @@
                         <div class="flex items-center justify-between gap-6 py-4">
                             <dt class="font-mono text-[11px] uppercase tracking-widest text-white/35 shrink-0">Head Office</dt>
                             <dd class="font-semibold text-white text-right">No. 32 Avenue Mwange, Golf Plateau, Commune Annexe, Lubumbashi, DRC</dd>
+                        </div>
+                        <div class="flex items-center justify-between gap-6 py-4">
+                            <dt class="font-mono text-[11px] uppercase tracking-widest text-white/35 shrink-0">SA Office</dt>
+                            <dd class="font-semibold text-white text-right">16 Caithness Road, Blairgowrie, 2194, RSA</dd>
                         </div>
                     </dl>
                 </div>

@@ -73,14 +73,21 @@
         </div>
 
         <div class="md:col-span-3">
-            <p class="font-mono text-[11px] tracking-widest text-nexa-green uppercase mb-4">Head Office</p>
+            <p class="font-mono text-[11px] tracking-widest text-nexa-green uppercase mb-4">Offices</p>
             <ul class="space-y-3.5 text-sm text-white/70">
                 <li class="flex gap-2.5">
                     <svg viewBox="0 0 20 20" class="h-4 w-4 mt-0.5 shrink-0 text-white/30" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M10 18s6-5.686 6-10a6 6 0 1 0-12 0c0 4.314 6 10 6 10Z"/>
                         <circle cx="10" cy="8" r="2.25" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>No. 32 Avenue Mwange, Golf Plateau,<br>Commune Annexe, Lubumbashi,<br>Haut-Katanga, DRC</span>
+                    <span><span class="block font-mono text-[11px] tracking-widest text-white/40 uppercase mb-1">Head Office</span>No. 32 Avenue Mwange, Golf Plateau,<br>Commune Annexe, Lubumbashi,<br>Haut-Katanga, DRC</span>
+                </li>
+                <li class="flex gap-2.5">
+                    <svg viewBox="0 0 20 20" class="h-4 w-4 mt-0.5 shrink-0 text-white/30" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 18s6-5.686 6-10a6 6 0 1 0-12 0c0 4.314 6 10 6 10Z"/>
+                        <circle cx="10" cy="8" r="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span><span class="block font-mono text-[11px] tracking-widest text-white/40 uppercase mb-1">SA Office</span>16 Caithness Road,<br>Blairgowrie, 2194,<br>RSA</span>
                 </li>
                 <li class="flex gap-2.5">
                     <svg viewBox="0 0 20 20" class="h-4 w-4 mt-0.5 shrink-0 text-white/30" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
