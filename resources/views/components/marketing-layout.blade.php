@@ -36,14 +36,14 @@
                 class="sticky top-0 z-50 transition-colors duration-300"
                 :class="scrolled ? 'bg-nexa-paper/90 backdrop-blur-md border-b border-nexa-line' : 'bg-transparent'"
             >
-                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex items-center justify-between h-[72px]">
+                <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-[72px] lg:h-[88px]">
                         <a
                             href="{{ route('home') }}"
                             class="shrink-0 flex items-center gap-3 transition duration-300"
-                            :class="scrolled ? '' : 'brightness-0 invert'"
+                            :class="scrolled ? '' : 'logo-glow'"
                         >
-                            <x-application-logo :transparent="true" class="h-9 w-auto" />
+                            <x-application-logo :transparent="true" class="h-12 lg:h-14 w-auto" />
                         </a>
 
                         <nav
@@ -96,7 +96,7 @@
             </header>
 
             <!-- Page Content (pulled up so the hero sits behind the transparent header) -->
-            <main class="grow -mt-[72px]">
+            <main class="grow -mt-[72px] lg:-mt-[88px]">
                 {{ $slot }}
             </main>
 

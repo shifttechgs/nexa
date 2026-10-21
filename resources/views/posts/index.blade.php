@@ -3,7 +3,7 @@
     :description="'Insights and updates from Nexa Mining and Engineering Services.'"
 >
     <section class="bg-nexa-navy">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-16">
+        <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-16">
             <x-section-label text="Insights" :dark="true" />
             <h1 class="mt-5 font-display font-medium text-4xl sm:text-5xl lg:text-6xl tracking-tightest text-white">From the field.</h1>
             <p class="mt-5 text-white/55 max-w-xl leading-relaxed">
@@ -13,7 +13,7 @@
     </section>
 
     <section class="py-20">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8">
             @if ($posts->isEmpty())
                 <p class="text-nexa-ink/60">No insights published yet &mdash; check back soon.</p>
             @else

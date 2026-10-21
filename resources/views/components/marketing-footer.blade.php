@@ -8,11 +8,11 @@
     <!-- Main grid -->
     <div class="pt-16 pb-12">
         <div
-            class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-10"
+            class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-10"
             data-reveal x-data="{ shown: false }" x-intersect.once="shown = true" :class="{ 'is-revealed': shown }"
         >
         <div class="md:col-span-5">
-            <x-application-logo :transparent="true" class="h-10 w-auto" />
+            <x-application-logo :transparent="true" class="h-14 w-auto" />
             <p class="mt-6 text-sm leading-relaxed max-w-sm text-white/50">
                 Nexa distributes quality mining, industrial and technical consumables while providing reliable
                 support services to mining operations across the DRC, Central and Southern Africa.
@@ -115,12 +115,10 @@
     </div>
 
     <!-- Wordmark watermark -->
-    <div class="px-4 pb-4 sm:pb-6 overflow-hidden" aria-hidden="true">
-        <p class="footer-wordmark text-center text-[23vw] lg:text-[17rem]">NEXA</p>
-    </div>
+    <x-footer-wordmark text="NEXA" />
 
     <div class="border-t border-white/10">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-[11px] tracking-wide text-white/30">
+        <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-[11px] tracking-wide text-white/30">
             <p class="text-center sm:text-left">&copy; {{ date('Y') }} NEXA MINING &amp; ENGINEERING SERVICES &mdash; SARL &middot; REG. OHADA COMPLIANT, LUBUMBASHI, DRC</p>
             <div class="flex items-center gap-5 shrink-0">
                 <a href="https://shifttechgs.com" target="_blank" rel="noopener noreferrer" class="uppercase tracking-widest hover:text-white transition">Designed by ShiftTech</a>

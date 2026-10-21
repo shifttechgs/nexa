@@ -7,7 +7,7 @@
 --}}
 <x-marketing-layout :title="'Dev Preview — Testimonials Wall'">
     <section class="py-24 bg-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-2xl">
                 <p class="font-label text-sm uppercase tracking-[0.2em] text-nexa-green mb-4">What Clients Say</p>
                 <h2 class="font-display font-bold text-3xl sm:text-4xl text-nexa-ink">Trusted on site.</h2>

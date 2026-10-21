@@ -34,28 +34,39 @@
         <div class="relative z-10 flex-1 flex items-end">
             <div class="relative w-full max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-8 sm:pb-10">
 
-                <div class="lg:flex lg:items-end lg:justify-between lg:gap-10">
-                    <div class="max-w-3xl">
-                        <h1 class="font-display font-medium text-[2.25rem] leading-[1.07] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.5rem] 2xl:text-[3.9rem] tracking-tightest text-white">
-                            <span class="block rise-in" style="--i: 0">Mining supply and logistics,</span>
-                            <span class="block rise-in" style="--i: 1">delivered with precision.</span>
-                        </h1>
+                <!-- Eyebrow: discipline + footprint, set on the same left edge as the logo and headline -->
+                <div class="flex items-center gap-3 font-mono text-[11px] uppercase tracking-widest text-white/55 rise-in" style="--i: 0">
+                    <span class="h-px w-8 bg-nexa-green"></span>
+                    <span>Mining &amp; Industrial Supply</span>
+                    <span class="hidden sm:inline text-white/30">/</span>
+                    <span class="hidden sm:inline">DRC &middot; ZM &middot; ZW &middot; ZA</span>
+                </div>
 
-                        <div class="mt-6 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-10">
-                            <p class="max-w-lg text-base sm:text-lg text-white/70 leading-relaxed rise-in" style="--i: 2">
-                                Explosives, equipment, fuel, technology and training &mdash; one partner across four countries.
-                            </p>
-                            <div class="lg:shrink-0 rise-in" style="--i: 3">
-                                <x-btn href="#contact" variant="primary">Request a Quote</x-btn>
-                            </div>
+                <!-- Headline: full measure, fluid size so each line holds on one row from tablet up -->
+                <h1 class="mt-6 font-display font-medium text-[clamp(2.5rem,6vw,5.5rem)] leading-[1.02] tracking-tightest text-white text-balance">
+                    <span class="block rise-in" style="--i: 1">Mining supply and logistics,</span>
+                    <span class="block rise-in" style="--i: 2">delivered with precision.</span>
+                </h1>
+
+                <!-- Supporting row on a 12-col grid: copy + action share the headline's left edge | service card closes the right edge -->
+                <div class="mt-8 sm:mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:items-end">
+                    <div class="lg:col-span-6">
+                        <p class="max-w-md text-base sm:text-lg text-white/70 leading-relaxed rise-in" style="--i: 3">
+                            Explosives, equipment, fuel, technology and training &mdash; one partner across four countries.
+                        </p>
+                        <div class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4 rise-in" style="--i: 4">
+                            <x-btn href="#contact" variant="primary-on-dark">Request a Quote</x-btn>
+                            <a href="#services" class="group inline-flex items-center gap-2 text-sm font-semibold text-white/80 hover:text-white transition-colors">
+                                <span class="border-b border-white/30 group-hover:border-white pb-0.5 transition-colors">Our services</span>
+                            </a>
                         </div>
                     </div>
 
                     <!-- Explore Services card -->
                     <a
                         href="#services"
-                        class="hidden lg:flex shrink-0 w-72 items-stretch gap-3 bg-white/10 backdrop-blur-sm ring-1 ring-white/15 p-3 rise-in hover:bg-white/15 transition-colors group"
-                        style="--i: 3"
+                        class="hidden lg:flex lg:col-span-4 lg:col-start-9 lg:justify-self-end w-full max-w-xs items-stretch gap-3 bg-white/10 backdrop-blur-sm ring-1 ring-white/15 p-3 rise-in hover:bg-white/15 transition-colors group"
+                        style="--i: 4"
                     >
                         <img
                             src="{{ asset('images/photos/crusher-machine.jpg') }}"
@@ -74,10 +85,10 @@
                 </div>
 
                 <!-- Divider -->
-                <div class="mt-10 sm:mt-12 border-t border-white/15 rise-in" style="--i: 4"></div>
+                <div class="mt-10 sm:mt-12 border-t border-white/15 rise-in" style="--i: 5"></div>
 
-                <!-- Trust row: compliance checks + rating -->
-                <div class="mt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rise-in" style="--i: 5">
+                <!-- Trust row: compliance checks + scroll cue -->
+                <div class="mt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rise-in" style="--i: 6">
                     <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
                         @foreach (['OHADA Compliant', '4-Country Coverage', 'Quality Assured'] as $point)
                             <span class="inline-flex items-center gap-2 text-sm text-white/70">
@@ -90,30 +101,19 @@
                         @endforeach
                     </div>
 
-                    <div class="relative inline-flex flex-col items-center self-center w-44 h-[4.5rem] shrink-0 px-6">
-                        <svg viewBox="0 0 176 72" class="absolute inset-0 h-full w-full text-white/30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M46 68 C 26 60, 16 46, 14 13"/>
-                            <path d="M42 62 l-11 -3"/><path d="M36 54 l-12 -2"/><path d="M31 46 l-12 -1"/><path d="M27 38 l-12 0.5"/><path d="M23.5 30 l-11.5 1.5"/><path d="M19.5 22 l-10.5 2"/><path d="M16 15 l-9 2.5"/>
-                            <g transform="translate(176,0) scale(-1,1)">
-                                <path d="M46 68 C 26 60, 16 46, 14 13"/>
-                                <path d="M42 62 l-11 -3"/><path d="M36 54 l-12 -2"/><path d="M31 46 l-12 -1"/><path d="M27 38 l-12 0.5"/><path d="M23.5 30 l-11.5 1.5"/><path d="M19.5 22 l-10.5 2"/><path d="M16 15 l-9 2.5"/>
-                            </g>
-                        </svg>
-                        <div class="relative flex items-center gap-0.5 text-nexa-green">
-                            @for ($i = 0; $i < 5; $i++)
-                                <svg viewBox="0 0 20 20" class="h-3 w-3 fill-current" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.2 1.3 6-5.4-3.1-5.4 3.1 1.3-6-4.6-4.2 6.1-.6z"/></svg>
-                            @endfor
-                        </div>
-                        <p class="relative mt-1.5 font-mono text-[10px] uppercase tracking-widest text-white/60 whitespace-nowrap">4.9 Highly Rated</p>
-                    </div>
+                    <!-- Scroll cue -->
+                    <a href="#commitment" class="group hidden sm:inline-flex items-center gap-3 shrink-0 font-mono text-[11px] uppercase tracking-widest text-white/55 hover:text-white transition-colors">
+                        Scroll
+                        <span class="scroll-cue-line relative block h-10 w-px overflow-hidden bg-white/20" aria-hidden="true"></span>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Commitment -->
-    <section class="bg-nexa-paper">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
+    <section id="commitment" class="bg-nexa-paper">
+        <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
             <div data-reveal x-data="{ shown: false }" x-intersect.once="shown = true" :class="{ 'is-revealed': shown }">
                 <x-section-label text="Our Commitment" />
             </div>
@@ -145,7 +145,7 @@
 
     <!-- Clients -->
     <section class="bg-nexa-bone border-y border-nexa-line">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-28">
+        <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-28">
             <div class="text-center max-w-2xl mx-auto" data-reveal x-data="{ shown: false }" x-intersect.once="shown = true" :class="{ 'is-revealed': shown }">
                 <x-section-label text="Our Clients" class="justify-center" />
                 <h2 class="mt-5 font-display font-medium text-3xl sm:text-4xl lg:text-5xl tracking-tight text-nexa-ink">Trusted across the region.</h2>
@@ -179,7 +179,7 @@
         ];
     @endphp
     <section id="services" class="py-24">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-2xl" data-reveal x-data="{ shown: false }" x-intersect.once="shown = true" :class="{ 'is-revealed': shown }">
                 <x-section-label text="Core Services" />
                 <h2 class="mt-5 font-display font-medium text-3xl sm:text-5xl tracking-tight text-nexa-ink">Everything a mine site needs, from one partner.</h2>
@@ -274,7 +274,7 @@
     <!-- Client Reviews -->
     @if ($testimonials->isNotEmpty())
         <section class="py-24 bg-nexa-bone border-y border-nexa-line overflow-hidden">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start" data-reveal x-data="{ shown: false }" x-intersect.once="shown = true" :class="{ 'is-revealed': shown }">
                     <div>
                         <x-section-label text="Client Reviews" />
@@ -325,7 +325,7 @@
             ];
         @endphp
         <section id="products" class="py-24 bg-nexa-bone border-y border-nexa-line">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4" data-reveal x-data="{ shown: false }" x-intersect.once="shown = true" :class="{ 'is-revealed': shown }">
                     <div class="max-w-2xl">
                         <x-section-label text="Products" />
@@ -375,7 +375,7 @@
     <!-- Mid-page CTA -->
     <section class="bg-nexa-navy">
         <div
-            class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32"
+            class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32"
             data-reveal x-data="{ shown: false }" x-intersect.once="shown = true" :class="{ 'is-revealed': shown }"
         >
             <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-white/60 flex items-center gap-2.5">
@@ -401,7 +401,7 @@
 
     <!-- Regions -->
     <section id="regions" class="py-24" x-data="{ active: 'cd', revealed: false }">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+        <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
             <div data-reveal x-data="{ shown: false }" x-intersect.once="shown = true" :class="{ 'is-revealed': shown }">
                 <x-section-label text="Regional Reach" />
                 <h2 class="mt-5 font-display font-medium text-3xl sm:text-4xl lg:text-5xl tracking-tight text-nexa-ink">One partner, four countries.</h2>
@@ -447,7 +447,7 @@
 
     <!-- FAQ -->
     <section id="faq" class="py-24 bg-nexa-bone border-y border-nexa-line" x-data="{ open: 0 }">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-12 gap-10 lg:gap-16">
                 <div class="lg:col-span-4" data-reveal x-data="{ shown: false }" x-intersect.once="shown = true" :class="{ 'is-revealed': shown }">
                     <x-section-label text="FAQ" />
@@ -503,7 +503,7 @@
         >
         <div class="contact-grade absolute inset-0"></div>
 
-        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-14 lg:gap-20 items-stretch">
 
                 <div class="flex flex-col" data-reveal x-data="{ shown: false }" x-intersect.once="shown = true" :class="{ 'is-revealed': shown }">
@@ -633,7 +633,7 @@
                 },
             }"
         >
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4" data-reveal x-data="{ shown: false }" x-intersect.once="shown = true" :class="{ 'is-revealed': shown }">
                     <div class="max-w-2xl">
                         <x-section-label text="Insights" />

@@ -3,7 +3,7 @@
     :description="'Product catalog from Nexa Mining and Engineering Services — explosives, mining chemicals, equipment spares, fuel and technology supply.'"
 >
     <section class="bg-nexa-navy">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-16">
+        <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-16">
             <x-section-label text="Products" :dark="true" />
             <h1 class="mt-5 font-display font-medium text-4xl sm:text-5xl lg:text-6xl tracking-tightest text-white">The catalog.</h1>
             <p class="mt-5 text-white/55 max-w-xl leading-relaxed">
@@ -14,7 +14,7 @@
     </section>
 
     <section class="py-20" x-data="{ active: 'All' }">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- Category filter -->
             <div class="flex flex-wrap gap-2 border-b border-nexa-line pb-6">
@@ -63,7 +63,7 @@
 
     <!-- CTA -->
     <section class="pb-24">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="rounded-2xl bg-nexa-navy p-8 sm:p-10 text-white flex flex-col sm:flex-row items-center justify-between gap-6">
                 <div>
                     <p class="font-display font-semibold text-lg">Can't find what you need?</p>
