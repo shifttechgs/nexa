@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all()->groupBy('category');
+        $products = Product::all();
+        $categories = $products->countBy('category');
 
-        return view('products.index', compact('products'));
+        // ?category= deep-links from the home page; unknown values fall back to "All"
+        $activeCategory = $categories->has($request->query('category')) ? $request->query('category') : 'All';
+
+        return view('products.index', compact('products', 'categories', 'activeCategory'));
     }
 
     public function show(string $product)
@@ -22,7 +27,7 @@ class ProductController extends Controller
         $related = Product::all()
             ->where('category', $product->category)
             ->reject(fn (Product $item) => $item->slug === $product->slug)
-            ->take(3);
+            ->take(4);
 
         return view('products.show', compact('product', 'related'));
     }

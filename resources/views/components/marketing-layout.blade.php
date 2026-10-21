@@ -6,11 +6,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="description" content="{{ $description ?? 'Nexa Mining and Engineering Services — mining and industrial supply, equipment and logistics, fuel and energy, and training across the DRC, Zimbabwe, Zambia and South Africa.' }}">
+        <meta name="description" content="{{ $description ?? 'Nexa Mining and Engineering Services supplies explosives, mining chemicals, equipment, fuel and training to mines in the DRC, Zambia, Zimbabwe and South Africa.' }}">
 
         <title>{{ $title ? $title.' - '.config('app.name') : config('app.name') }}</title>
 
         <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}">
+        <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
 
         <!-- Fonts: Satoshi + Switzer (Fontshare), IBM Plex Mono (Google) -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +24,9 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        {{-- Page-specific head tags (social cards, structured data) --}}
+        {{ $head ?? '' }}
     </head>
     <body class="font-sans text-nexa-ink antialiased bg-nexa-paper">
         <div
@@ -36,7 +41,7 @@
                 class="sticky top-0 z-50 transition-colors duration-300"
                 :class="scrolled ? 'bg-nexa-paper/90 backdrop-blur-md border-b border-nexa-line' : 'bg-transparent'"
             >
-                <div class="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="site-container">
                     <div class="flex items-center justify-between h-[72px] lg:h-[88px]">
                         <a
                             href="{{ route('home') }}"
@@ -50,16 +55,30 @@
                             class="hidden lg:flex items-center gap-1 font-label text-[13px] uppercase tracking-[0.14em] transition-colors duration-300"
                             :class="scrolled ? 'text-nexa-ink/70' : 'text-white/80'"
                         >
-                            <a href="{{ route('home') }}" class="nav-link">Home</a>
-                            <a href="{{ route('home') }}#services" class="nav-link">Services</a>
-                            <a href="{{ route('products.index') }}" class="nav-link">Products</a>
-                            <a href="{{ route('home') }}#regions" class="nav-link">Regions</a>
-                            <a href="{{ route('posts.index') }}" class="nav-link">Insights</a>
-                            <a href="{{ route('home') }}#contact" class="nav-link">Contact</a>
+                            <x-nav-dropdown label="Services" :active="request()->routeIs('services.*')">
+                                @foreach (\App\Models\Service::all() as $navService)
+                                    <a href="{{ route('services.index') }}#{{ $navService->slug }}" class="group block px-5 py-3 border-b border-nexa-line hover:bg-nexa-bone focus-visible:bg-nexa-bone focus-visible:outline-none transition-colors">
+                                        <span class="font-display font-medium text-[15px] text-nexa-ink group-hover:text-nexa-green transition-colors">{{ $navService->title }}</span>
+                                    </a>
+                                @endforeach
+                                <a href="{{ route('services.index') }}" class="block px-5 py-3.5 text-nexa-ink/60 hover:text-nexa-ink hover:bg-nexa-bone focus-visible:bg-nexa-bone focus-visible:text-nexa-ink focus-visible:outline-none transition-colors">All services</a>
+                            </x-nav-dropdown>
+                            <a href="{{ route('products.index') }}" @class(['nav-link', 'nav-link--active' => request()->routeIs('products.*')])>Products</a>
+                            <x-nav-dropdown label="Regions" :active="request()->routeIs('regions.*')">
+                                @foreach (\App\Models\Region::all() as $navRegion)
+                                    <a href="{{ route('regions.show', $navRegion->slug) }}" class="group flex items-baseline justify-between gap-4 px-5 py-3.5 border-b border-nexa-line hover:bg-nexa-bone focus-visible:bg-nexa-bone focus-visible:outline-none transition-colors">
+                                        <span class="font-display font-medium text-base text-nexa-ink group-hover:text-nexa-green transition-colors">{{ $navRegion->name }}</span>
+                                        <span class="text-xs text-nexa-ink/50">{{ $navRegion->presence }}{{ $navRegion->city ? ', '.$navRegion->city : '' }}</span>
+                                    </a>
+                                @endforeach
+                                <a href="{{ route('home') }}#regions" class="block px-5 py-3.5 text-nexa-ink/60 hover:text-nexa-ink hover:bg-nexa-bone focus-visible:bg-nexa-bone focus-visible:text-nexa-ink focus-visible:outline-none transition-colors">See them on the map</a>
+                            </x-nav-dropdown>
+                            <a href="{{ route('posts.index') }}" class="nav-link">Articles</a>
+                            <a href="{{ route('contact') }}" @class(['nav-link', 'nav-link--active' => request()->routeIs('contact')])>Contact</a>
                         </nav>
 
                         <div class="hidden lg:flex items-center gap-5">
-                            <x-btn :href="route('home').'#contact'" variant="primary" size="sm" :arrow="false">
+                            <x-btn :href="route('contact')" variant="primary" size="sm" :arrow="false">
                                 Request a Quote
                             </x-btn>
                         </div>
@@ -82,14 +101,39 @@
                 <!-- Mobile menu -->
                 <div x-cloak x-show="open" x-transition class="lg:hidden border-t border-nexa-line bg-nexa-paper">
                     <div class="px-4 py-3 space-y-1">
-                        <a href="{{ route('home') }}" class="block py-2.5 text-base font-medium text-nexa-ink/80 hover:text-nexa-ink">Home</a>
-                        <a href="{{ route('home') }}#services" class="block py-2.5 text-base font-medium text-nexa-ink/80 hover:text-nexa-ink">Services</a>
+                        <div x-data="{ expanded: @js(request()->routeIs('services.*')) }">
+                            <button type="button" @click="expanded = ! expanded" :aria-expanded="expanded.toString()" class="flex w-full items-center justify-between py-2.5 text-base font-medium text-nexa-ink/80 hover:text-nexa-ink">
+                                Services
+                                <svg viewBox="0 0 12 12" class="h-3 w-3 text-nexa-ink/45 transition-transform duration-200" :class="{ 'rotate-180': expanded }" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"/></svg>
+                            </button>
+                            <div x-show="expanded" x-collapse x-cloak>
+                                <div class="pl-4 border-l border-nexa-line ml-1 mb-2">
+                                    @foreach (\App\Models\Service::all() as $navService)
+                                        <a href="{{ route('services.index') }}#{{ $navService->slug }}" @click="open = false" class="block py-2 text-[15px] text-nexa-ink/65 hover:text-nexa-ink">{{ $navService->title }}</a>
+                                    @endforeach
+                                    <a href="{{ route('services.index') }}" @click="open = false" class="block py-2 text-[15px] text-nexa-ink/45 hover:text-nexa-ink">All services</a>
+                                </div>
+                            </div>
+                        </div>
                         <a href="{{ route('products.index') }}" class="block py-2.5 text-base font-medium text-nexa-ink/80 hover:text-nexa-ink">Products</a>
-                        <a href="{{ route('home') }}#regions" class="block py-2.5 text-base font-medium text-nexa-ink/80 hover:text-nexa-ink">Regions</a>
-                        <a href="{{ route('posts.index') }}" class="block py-2.5 text-base font-medium text-nexa-ink/80 hover:text-nexa-ink">Insights</a>
-                        <a href="{{ route('home') }}#contact" class="block py-2.5 text-base font-medium text-nexa-ink/80 hover:text-nexa-ink">Contact</a>
+                        <div x-data="{ expanded: @js(request()->routeIs('regions.*')) }">
+                            <button type="button" @click="expanded = ! expanded" :aria-expanded="expanded.toString()" class="flex w-full items-center justify-between py-2.5 text-base font-medium text-nexa-ink/80 hover:text-nexa-ink">
+                                Regions
+                                <svg viewBox="0 0 12 12" class="h-3 w-3 text-nexa-ink/45 transition-transform duration-200" :class="{ 'rotate-180': expanded }" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"/></svg>
+                            </button>
+                            <div x-show="expanded" x-collapse x-cloak>
+                                <div class="pl-4 border-l border-nexa-line ml-1 mb-2">
+                                    @foreach (\App\Models\Region::all() as $navRegion)
+                                        <a href="{{ route('regions.show', $navRegion->slug) }}" @click="open = false" class="block py-2 text-[15px] text-nexa-ink/65 hover:text-nexa-ink">{{ $navRegion->name }}</a>
+                                    @endforeach
+                                    <a href="{{ route('home') }}#regions" @click="open = false" class="block py-2 text-[15px] text-nexa-ink/45 hover:text-nexa-ink">See them on the map</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{{ route('posts.index') }}" class="block py-2.5 text-base font-medium text-nexa-ink/80 hover:text-nexa-ink">Articles</a>
+                        <a href="{{ route('contact') }}" class="block py-2.5 text-base font-medium text-nexa-ink/80 hover:text-nexa-ink">Contact</a>
                         <div class="pt-3 mt-2 border-t border-nexa-line">
-                            <a href="{{ route('home') }}#contact" class="block px-4 py-2.5 text-base font-semibold text-white bg-nexa-green text-center">Request a Quote</a>
+                            <a href="{{ route('contact') }}" class="block px-4 py-2.5 text-base font-semibold text-white bg-nexa-green text-center">Request a Quote</a>
                         </div>
                     </div>
                 </div>
@@ -102,6 +146,8 @@
 
             <x-marketing-footer />
         </div>
+
+        <x-quote-bar />
 
         {{-- Floating WhatsApp button — hidden for now --}}
         {{-- <x-whatsapp-button /> --}}

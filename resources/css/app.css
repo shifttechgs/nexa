@@ -2,6 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Shared page container: 84rem up to laptop sizes, then it widens with the screen
+   (with roomier gutters) so big displays don't leave the content marooned in the middle. */
+@layer components {
+    .site-container {
+        width: 100%;
+        max-width: 84rem;
+        margin-inline: auto;
+        padding-inline: 1rem;
+    }
+    @media (min-width: 640px) {
+        .site-container { padding-inline: 1.5rem; }
+    }
+    @media (min-width: 1024px) {
+        .site-container { padding-inline: 2rem; }
+    }
+    @media (min-width: 1536px) {
+        .site-container { max-width: 104rem; padding-inline: 3rem; }
+    }
+    @media (min-width: 1920px) {
+        .site-container { max-width: 124rem; padding-inline: 4rem; }
+    }
+
+    /* Section H2: Satoshi medium, 31 / 38 / 48px at the 810 and 1200 breakpoints. */
+    .section-title {
+        font-family: theme('fontFamily.display');
+        font-weight: 500;
+        font-size: 1.9375rem;
+        line-height: 1.3;
+        letter-spacing: -0.02em;
+        text-wrap: balance;
+    }
+    @media (min-width: 810px) {
+        .section-title { font-size: 2.375rem; }
+    }
+    @media (min-width: 1200px) {
+        .section-title { font-size: 3rem; }
+    }
+}
+
 @layer base {
     html {
         scroll-behavior: smooth;
@@ -30,10 +69,10 @@
 --------------------------------------------------------------------------- */
 [data-reveal] {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(40px);
     transition:
-        opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.45s cubic-bezier(0.44, 0, 0.56, 1),
+        transform 0.45s cubic-bezier(0.44, 0, 0.56, 1);
     will-change: opacity, transform;
 }
 [data-reveal].is-revealed {
@@ -44,15 +83,30 @@
 /* Staggered children: each direct child eases in on its own delay (--i set inline). */
 [data-reveal-stagger] > * {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(40px);
     transition:
-        opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    transition-delay: calc(70ms * var(--i, 0));
+        opacity 0.45s cubic-bezier(0.44, 0, 0.56, 1),
+        transform 0.45s cubic-bezier(0.44, 0, 0.56, 1);
+    transition-delay: calc(50ms * var(--i, 0));
 }
 [data-reveal-stagger].is-revealed > * {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Automatic reveal (initAutoReveal in app.js): headings, copy, images and grid cards rise
+   40px into place as they enter the viewport. Uses `translate`, not `transform`, so it
+   never fights an element's own hover transforms; the attribute is removed once done. */
+[data-auto-reveal] {
+    opacity: 0;
+    translate: 0 40px;
+    transition:
+        opacity 0.45s cubic-bezier(0.44, 0, 0.56, 1) var(--reveal-delay, 0ms),
+        translate 0.45s cubic-bezier(0.44, 0, 0.56, 1) var(--reveal-delay, 0ms);
+}
+[data-auto-reveal].is-in {
+    opacity: 1;
+    translate: none;
 }
 
 /* On-load hero entrance — lines / sub / actions rise in sequence (--i set inline). */
@@ -73,6 +127,8 @@
 @media (prefers-reduced-motion: reduce) {
     [data-reveal],
     [data-reveal-stagger] > *,
+    [data-auto-reveal],
+    .review-slide,
     .rise-in {
         opacity: 1 !important;
         transform: none !important;
@@ -105,13 +161,15 @@
         linear-gradient(to left, rgba(11, 35, 64, 0.5) 0%, rgba(11, 35, 64, 0.1) 30%, rgba(11, 35, 64, 0) 52%);
 }
 
+/* Slow push-in with a drift to the upper left, then eases back. Big enough to read as
+   motion while the page sits still; the scroll parallax runs on the wrapper above it. */
 @keyframes hero-kenburns {
-    0%   { transform: scale(1.03) translate3d(0, 0, 0); }
-    100% { transform: scale(1.09) translate3d(-1%, -1.2%, 0); }
+    0%   { transform: scale(1.04) translate3d(0, 0, 0); }
+    100% { transform: scale(1.18) translate3d(-2.5%, -2%, 0); }
 }
 .hero-kenburns {
-    transform: scale(1.03);
-    animation: hero-kenburns 28s ease-in-out infinite alternate;
+    transform: scale(1.04);
+    animation: hero-kenburns 20s ease-in-out infinite alternate;
 }
 
 .hero-grain {
@@ -126,29 +184,18 @@
     }
 }
 
-/* Client-reviews marquee — full-bleed row that auto-scrolls; pauses on hover. */
-@keyframes marquee-x {
-    from { transform: translate3d(0, 0, 0); }
-    to   { transform: translate3d(-25%, 0, 0); }
+/* Client reviews: the selected quote fades up in place; the rest stay stacked underneath. */
+.review-slide {
+    opacity: 0;
+    visibility: hidden;
+    translate: 0 12px;
+    transition: opacity 0.3s ease, translate 0.3s ease, visibility 0s linear 0.3s;
 }
-.marquee-track {
-    animation: marquee-x 34s linear infinite;
-    width: max-content;
-}
-.marquee-wrap:hover .marquee-track {
-    animation-play-state: paused;
-}
-@media (prefers-reduced-motion: reduce) {
-    .marquee-track {
-        animation: none;
-    }
-    .marquee-wrap {
-        overflow-x: auto;
-        scrollbar-width: none;
-    }
-    .marquee-wrap::-webkit-scrollbar {
-        display: none;
-    }
+.review-slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    translate: none;
+    transition: opacity 0.45s cubic-bezier(0.44, 0, 0.56, 1) 0.1s, translate 0.45s cubic-bezier(0.44, 0, 0.56, 1) 0.1s, visibility 0s;
 }
 
 /* Contact — dark enough on the left for the copy to sit on, lighter through the
@@ -163,33 +210,67 @@
     );
 }
 
-/* Services accordion — dark at the top (title) and bottom (copy), clear through the middle. */
-.svc-grade {
-    background-image: linear-gradient(
-        to bottom,
-        rgba(11, 35, 64, 0.8) 0%,
-        rgba(11, 35, 64, 0.1) 38%,
-        rgba(11, 35, 64, 0.35) 66%,
-        rgba(11, 35, 64, 0.9) 100%
-    );
+/* ---------------------------------------------------------------------------
+   Services — stacking rows (desktop). Row i sticks at top + i * step, so each
+   new row covers the last and the earlier ones stay visible as title strips.
+--------------------------------------------------------------------------- */
+@media (min-width: 1024px) {
+    .svc-stack {
+        --svc-top: 112px;
+        --svc-step: 84px;
+        --svc-tail: calc((var(--svc-count, 6) - 1) * var(--svc-step));
+        /* The negative margin hands the spacer's room to the next section, which slides up
+           over the stacked rows instead of leaving a blank gap. */
+        margin-bottom: calc(-1 * var(--svc-tail));
+    }
+    /* Room for every row to finish stacking before the group scrolls away together. It has to
+       be a real box: sticky rows are held inside the content area, so padding doesn't count. */
+    .svc-stack::after {
+        content: "";
+        display: block;
+        height: var(--svc-tail);
+    }
+    #services + section {
+        position: relative;
+        z-index: 10;
+    }
+    .svc-row {
+        position: sticky;
+        top: calc(var(--svc-top) + var(--i) * var(--svc-step));
+    }
+}
+@media (min-width: 1024px) and (max-height: 860px) {
+    .svc-stack { --svc-step: 64px; }
+    .svc-row { padding-block: 1.75rem; }
+    .svc-media { aspect-ratio: 16 / 8; }
 }
 
-/* ---------------------------------------------------------------------------
-   Sticky-stacking cards (services on the home page)
---------------------------------------------------------------------------- */
-.sticky-stack > .sticky-card {
-    position: sticky;
-    top: var(--stack-top, 96px);
+/* Arrow square: on hover the arrow slides out to the right and a second one follows in from the left */
+.svc-arrow {
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
 }
-@media (max-width: 1023px) {
-    .sticky-stack > .sticky-card {
-        position: static;
-    }
+.svc-arrow::before,
+.svc-arrow::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 8h11M9 4l4 4-4 4' fill='none' stroke='black' stroke-width='1.6'/%3E%3C/svg%3E") center / 40% no-repeat;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
+.svc-arrow::after { transform: translateX(-100%); }
+/* :active covers a tap on touch screens, which have no hover. */
+.group:hover .svc-arrow::before,
+.group:active .svc-arrow::before,
+.group:focus-visible .svc-arrow::before { transform: translateX(100%); }
+.group:hover .svc-arrow::after,
+.group:active .svc-arrow::after,
+.group:focus-visible .svc-arrow::after { transform: none; }
 @media (prefers-reduced-motion: reduce) {
-    .sticky-stack > .sticky-card {
-        position: static;
-    }
+    .svc-arrow::before,
+    .svc-arrow::after { transition: none; }
 }
 
 /* ---------------------------------------------------------------------------
@@ -252,6 +333,128 @@
 }
 
 /* ---------------------------------------------------------------------------
+   Scroll-linked reveals — driven by --p (0 → 1) on the nearest
+   [data-scroll-progress] ancestor, set in app.js. --p defaults to 1, so
+   without JS or with reduced motion everything sits fully revealed.
+--------------------------------------------------------------------------- */
+[data-scroll-progress] {
+    --p: 1;
+}
+/* Photo: the frame wipes open from its own side; the photo settles out of a zoom */
+.photo-reveal {
+    clip-path: inset(0 calc((1 - var(--p, 1)) * 100%) 0 0);
+}
+.photo-reveal--from-right {
+    clip-path: inset(0 0 0 calc((1 - var(--p, 1)) * 100%));
+}
+.photo-reveal img {
+    scale: calc(1.15 - 0.15 * var(--p, 1));
+}
+/* Text column: rises and fades in, a little behind the photo */
+.scroll-rise {
+    --rise: clamp(0, calc(var(--p, 1) * 1.25 - 0.2), 1);
+    opacity: var(--rise);
+    transform: translateY(calc((1 - var(--rise)) * 56px));
+}
+/* List items: each starts a step after the one before, all fully in by --p = 1
+   (item i starts at p = 0.3 + 0.06i and takes 0.3 of the scroll to arrive) */
+.scroll-stagger > * {
+    --item: clamp(0, calc((var(--p, 1) - 0.3 - var(--i, 0) * 0.06) / 0.3), 1);
+    opacity: var(--item);
+    transform: translateY(calc((1 - var(--item)) * 16px));
+}
+
+/* ---------------------------------------------------------------------------
+   Article body — typography for Markdown-rendered posts
+--------------------------------------------------------------------------- */
+.article-body {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: rgb(11 35 64 / 0.8);
+}
+.article-body > * + * {
+    margin-top: 1.5rem;
+}
+.article-body > p:first-child {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: #0B2340;
+}
+.article-body h2 {
+    margin-top: 3rem;
+    font-family: 'Satoshi', 'Switzer', sans-serif;
+    font-weight: 500;
+    font-size: 1.75rem;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: #0B2340;
+    scroll-margin-top: 7rem;
+}
+.article-body h2 + * {
+    margin-top: 1rem;
+}
+.article-body h3 {
+    margin-top: 2.25rem;
+    font-family: 'Satoshi', 'Switzer', sans-serif;
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: #0B2340;
+}
+.article-body strong {
+    font-weight: 600;
+    color: #0B2340;
+}
+.article-body a {
+    color: #0B2340;
+    text-decoration: underline;
+    text-decoration-color: rgb(30 122 60 / 0.5);
+    text-underline-offset: 0.2em;
+}
+.article-body a:hover {
+    color: #1E7A3C;
+}
+.article-body ul,
+.article-body ol {
+    padding-left: 0;
+    list-style: none;
+}
+.article-body li {
+    position: relative;
+    padding-left: 1.75rem;
+}
+.article-body li + li {
+    margin-top: 0.75rem;
+}
+.article-body ul > li::before {
+    content: '';
+    position: absolute;
+    left: 0.25rem;
+    top: 0.75em;
+    width: 0.5rem;
+    height: 2px;
+    background: #1E7A3C;
+}
+.article-body ol {
+    counter-reset: article-ol;
+}
+.article-body ol > li {
+    counter-increment: article-ol;
+}
+.article-body ol > li::before {
+    content: counter(article-ol) '.';
+    position: absolute;
+    left: 0;
+    font-weight: 600;
+    color: #1E7A3C;
+}
+.article-body blockquote {
+    padding-left: 1.25rem;
+    border-left: 2px solid #1E7A3C;
+    font-size: 1.25rem;
+    color: #0B2340;
+}
+
+/* ---------------------------------------------------------------------------
    Hero scroll cue — a green segment drops through a faint vertical track
 --------------------------------------------------------------------------- */
 .scroll-cue-line::after {
@@ -272,6 +475,34 @@
         animation: none;
         transform: translateY(0);
         opacity: 0.6;
+    }
+}
+
+/* Hero divider: the scroll cue's draw-in / draw-out turned on its side. Six times the cue's
+   duration so the two stay in step. */
+.hero-rule {
+    position: relative;
+    height: 1px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.15);
+}
+.hero-rule::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #1E7A3C;
+    transform: translateX(-100%);
+    animation: hero-rule-sweep 13.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes hero-rule-sweep {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero-rule::after {
+        animation: none;
+        transform: translateX(-100%);
     }
 }
 
@@ -390,4 +621,226 @@
         animation: none !important;
         transform: none !important;
     }
+}
+
+/* ---------------------------------------------------------------------------
+   Route concept (dev/concept) — the supply route as the page's structure.
+--------------------------------------------------------------------------- */
+
+/* Contour field: a slow survey-drone drift behind the dark panels. */
+@keyframes contour-drift {
+    from { transform: scale(1.05) translate3d(0, 0, 0); }
+    to   { transform: scale(1.12) translate3d(-2%, 1.5%, 0); }
+}
+.concept-contours {
+    animation: contour-drift 40s ease-in-out infinite alternate;
+}
+
+/* Shared map, recoloured for a dark background: muted land, green supply
+   countries, copper routes. */
+.map-dark {
+    /* Feathers the crop so the map dissolves into the hero instead of ending in a box. */
+    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 72%, transparent 100%);
+}
+.map-dark .land { fill: rgba(255, 255, 255, 0.06); stroke: #071a30; }
+.map-dark #cd, .map-dark #zm, .map-dark #zw, .map-dark #za { fill: rgba(30, 122, 60, 0.45); }
+.map-dark #cd.is-active, .map-dark #zm.is-active, .map-dark #zw.is-active, .map-dark #za.is-active { fill: rgba(30, 122, 60, 0.7); }
+.map-dark .pin-label { fill: #fff; stroke: #071a30; font-size: 11px; font-weight: 500; letter-spacing: 0.05em; }
+.map-dark .map-line { stroke: #C27A3E; stroke-opacity: 0.95; stroke-width: 3; }
+.map-dark circle[fill="#1E7A3C"] { fill: #C27A3E; }
+
+/* Hero order stages: the active stage's bar fills over the stage's 2.6s. */
+.stage-fill { width: 0; }
+.stage-fill.is-on { width: 100%; transition: width 2.6s linear; }
+.stage-fill.is-done { width: 100%; }
+
+/* Stamp button: a label pressed onto the page. The copper offset shadow
+   closes up on hover and fully on press. */
+.btn-stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.95rem 1.4rem;
+    font-family: theme('fontFamily.label');
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: #0B2340;
+    color: #fff;
+    border: 1.5px solid #0B2340;
+    box-shadow: 5px 5px 0 #C27A3E;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.btn-stamp::after {
+    content: '\2192';
+    font-family: theme('fontFamily.sans');
+    font-size: 1rem;
+    line-height: 1;
+}
+.btn-stamp:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 #C27A3E; }
+.btn-stamp:active { transform: translate(5px, 5px); box-shadow: 0 0 0 #C27A3E; }
+.btn-stamp--light { background: #fff; color: #0B2340; border-color: #fff; }
+
+/* Checkpoint sections: a rail column carries the route line, which fills in
+   copper as the section scrolls into view; the node lights up once it's
+   half drawn. */
+.checkpoint { position: relative; }
+.checkpoint-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+.checkpoint-rail { display: none; }
+@media (min-width: 1024px) {
+    .checkpoint-grid { grid-template-columns: 4.5rem minmax(0, 1fr); }
+    .checkpoint-rail { display: block; position: relative; }
+    .checkpoint-rail::before,
+    .checkpoint-rail::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0.4rem;
+        width: 1px;
+        background: rgba(11, 35, 64, 0.12);
+    }
+    .checkpoint-rail::after {
+        background: #C27A3E;
+        transform: scaleY(var(--p, 1));
+        transform-origin: top;
+    }
+    .checkpoint-grid--dark .checkpoint-rail::before { background: rgba(255, 255, 255, 0.12); }
+    .checkpoint-node {
+        position: absolute;
+        z-index: 1;
+        top: 6.1rem;
+        left: calc(0.4rem - 6px);
+        width: 13px;
+        height: 13px;
+        border: 2px solid #C27A3E;
+        background: #fff;
+    }
+    .checkpoint-node::after {
+        content: '';
+        position: absolute;
+        inset: 2px;
+        background: #C27A3E;
+        opacity: clamp(0, calc(var(--p, 1) * 3 - 1.2), 1);
+    }
+    .bg-nexa-bone .checkpoint-node { background: #F8F8F8; }
+    .checkpoint-grid--dark .checkpoint-node { background: #071a30; }
+}
+
+/* Supply manifest rows. */
+.manifest-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+    padding: 1.75rem 0;
+    border-top: 1px solid rgba(11, 35, 64, 0.12);
+    align-items: baseline;
+}
+.manifest-row:last-of-type { border-bottom: 1px solid rgba(11, 35, 64, 0.12); }
+.manifest-head { padding: 0 0 0.85rem; border-top: 0; }
+@media (min-width: 768px) {
+    .manifest-row { grid-template-columns: 5.5rem minmax(0, 1.05fr) minmax(0, 1.35fr) 2.75rem; gap: 2rem; }
+}
+.manifest-row > :nth-child(2) { transition: translate 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+a.manifest-row:hover > :nth-child(2) { translate: 0.5rem 0; }
+.manifest-go {
+    display: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    border: 1px solid rgba(11, 35, 64, 0.15);
+    color: #0B2340;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+@media (min-width: 768px) { .manifest-go { display: grid; } }
+a.manifest-row:hover .manifest-go { background: #C27A3E; border-color: #C27A3E; color: #fff; }
+.manifest-preview {
+    opacity: 0;
+    scale: 0.9;
+    transition: opacity 0.25s ease, scale 0.35s cubic-bezier(0.16, 1, 0.3, 1), translate 0.15s ease-out;
+}
+.manifest-preview.is-on { opacity: 1; scale: 1; }
+
+/* Route stops: the track fills left to right with scroll, and each stop
+   lights up as the fill reaches it (--n of --stops). */
+.route-stops { position: relative; }
+.route-track {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 7px;
+    height: 1px;
+    background: rgba(11, 35, 64, 0.15);
+}
+.route-track-fill {
+    position: absolute;
+    inset: 0;
+    background: #C27A3E;
+    transform: scaleX(var(--p, 1));
+    transform-origin: left;
+}
+.route-stop { --lit: 1; position: relative; }
+.route-stop-node {
+    position: relative;
+    display: block;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #C27A3E;
+    background: color-mix(in srgb, #C27A3E calc(var(--lit) * 100%), #F8F8F8);
+}
+@media (min-width: 1024px) {
+    .route-stop {
+        --lit: clamp(0, calc((var(--p, 1) * var(--stops) - var(--n)) * 2.5), 1);
+        opacity: calc(0.4 + 0.6 * var(--lit));
+    }
+}
+
+/* Delivery notes: a torn-off slip with a stamp that lands when it scrolls in. */
+.delivery-note { background: #F8F8F8; }
+.delivery-note-tear {
+    position: relative;
+    border-top: 1.5px dashed rgba(11, 35, 64, 0.2);
+}
+.delivery-note-tear::before,
+.delivery-note-tear::after {
+    content: '';
+    position: absolute;
+    top: -9px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+}
+.delivery-note-tear::before { left: -9px; }
+.delivery-note-tear::after { right: -9px; }
+
+.stamp {
+    flex-shrink: 0;
+    display: inline-block;
+    padding: 0.4rem 0.75rem;
+    font-family: theme('fontFamily.label');
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #93501F;
+    border: 2px solid #C27A3E;
+    outline: 1px solid rgba(194, 122, 62, 0.5);
+    outline-offset: 2px;
+    rotate: -8deg;
+    opacity: 0;
+    scale: 1.7;
+}
+.stamp.is-stamped {
+    opacity: 0.9;
+    scale: 1;
+    transition: opacity 0.2s ease, scale 0.35s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.stamp--light { color: #C27A3E; }
+
+@media (prefers-reduced-motion: reduce) {
+    .concept-contours { animation: none; }
+    .stage-fill.is-on { transition: none; }
+    .stamp { opacity: 0.9; scale: 1; transition: none !important; }
+    .manifest-preview { transition: opacity 0.2s ease; }
 }

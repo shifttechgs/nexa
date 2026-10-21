@@ -35,8 +35,19 @@ return [
         ],
     ],
 
+    // Inbox that receives quote requests from the contact page
+    'quotes' => [
+        'to' => env('QUOTE_REQUEST_TO', 'sales@nexaminingservices.com'),
+    ],
+
     'whatsapp' => [
         'number' => env('WHATSAPP_NUMBER'),
+    ],
+
+    // Footer social links; leave blank to hide the icon
+    'social' => [
+        'linkedin' => env('LINKEDIN_URL'),
+        'facebook' => env('FACEBOOK_URL'),
     ],
 
 ];

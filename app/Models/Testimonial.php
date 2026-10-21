@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Support\Collection;
 
 /**
- * Sample client testimonials for this demo site — hardcoded, no database table.
- * These are placeholders, not real client quotes; swap the content for actual
- * client words when they're available.
+ * Client testimonials — hardcoded, no database table. The quotes are real but
+ * came without the reviewers' names, so each one carries the theme it speaks
+ * to; name, title and company show on the page once they're filled in.
  */
 class Testimonial
 {
     public function __construct(
         public string $quote,
-        public string $name,
+        public string $topic,
+        public ?string $name = null,
         public ?string $title = null,
         public ?string $company = null,
     ) {
@@ -23,22 +24,20 @@ class Testimonial
     {
         return collect([
             new self(
-                quote: '[Placeholder — replace with a real quote from a client about delivery reliability: did their order arrive on time and in full?]',
-                name: 'Client Name',
-                title: 'Job Title',
-                company: 'Company Name',
+                quote: 'Excellent service from Nexa Mining & Engineering. The team was professional, responsive, and committed to delivering quality work. Communication was clear throughout, and the overall experience was positive. I would recommend them to anyone looking for a reliable engineering partner.',
+                topic: 'Professionalism & Service',
             ),
             new self(
-                quote: '[Placeholder — replace with a real quote about product or safety performance: how did our supplies hold up on site?]',
-                name: 'Client Name',
-                title: 'Job Title',
-                company: 'Company Name',
+                quote: 'Nexa Mining & Engineering demonstrated a strong commitment to quality and attention to detail. Their professional approach and focus on getting the job done properly made a great impression. A good team to work with.',
+                topic: 'Quality & Workmanship',
             ),
             new self(
-                quote: '[Placeholder — replace with a real quote about responsiveness or support: how did our sales/support team handle their request?]',
-                name: 'Client Name',
-                title: 'Job Title',
-                company: 'Company Name',
+                quote: 'Great experience working with Nexa Mining & Engineering. The team communicated well, handled the process professionally, and showed a clear understanding of the work required. I appreciated their approach and would gladly consider working with them again.',
+                topic: 'Communication & Reliability',
+            ),
+            new self(
+                quote: 'I would recommend Nexa Mining & Engineering to businesses looking for professional engineering services. The team showed a positive attitude, took the work seriously, and maintained a professional standard throughout the engagement.',
+                topic: 'Overall Recommendation',
             ),
         ]);
     }
