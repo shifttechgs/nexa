@@ -20,11 +20,12 @@ export default {
             },
             colors: {
                 // 60 / 20 / 10 brand system, taken from the Nexa logo:
-                // paper (warm off-white) is dominant, navy is structural/secondary, green is the sole accent.
+                // white paper is dominant, navy is structural/secondary, green is the sole accent.
+                // Neutrals follow Sandvik's light system: white page, #F8F8F8 grey bands, flat white cards on grey.
                 nexa: {
-                    paper: '#F7F6F3',
-                    bone: '#FFFFFF',
-                    mist: '#EEEDE8',
+                    paper: '#FFFFFF',
+                    bone: '#F8F8F8',
+                    mist: '#F1F1F1',
                     line: 'rgba(11, 35, 64, 0.12)',
                     ink: '#0B2340',
                     navy: '#0B2340',
@@ -32,6 +33,9 @@ export default {
                     green: '#1E7A3C',
                     'green-dark': '#155A2C',
                     red: '#B3241C',
+                    // Copperbelt accent — routes, checkpoints and stamps only; copper-dark is the text-safe shade.
+                    copper: '#C27A3E',
+                    'copper-dark': '#93501F',
                 },
             },
             letterSpacing: {

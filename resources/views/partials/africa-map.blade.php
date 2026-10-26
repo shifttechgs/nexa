@@ -3,7 +3,7 @@
     released into the public domain. Country paths retain their original ISO-code ids;
     styling, click handlers and pins below are custom.
 --}}
-<svg viewBox="0 0 1000 1000" class="w-full h-auto" :class="{ 'map-revealed': revealed }">
+<svg viewBox="{{ $viewBox ?? '0 0 1000 1000' }}" class="w-full h-auto" :class="{ 'map-revealed': revealed }">
     <style>
         .land { fill: #DCDDD9; stroke: #FFFFFF; stroke-width: 1.4px; }
         .circle { display: none; }

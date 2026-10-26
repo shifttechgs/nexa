@@ -19,6 +19,10 @@ class PostController extends Controller
 
         abort_unless($post, 404);
 
-        return view('posts.show', compact('post'));
+        $more = Post::all()
+            ->reject(fn (Post $item) => $item->slug === $post->slug)
+            ->take(3);
+
+        return view('posts.show', compact('post', 'more'));
     }
 }

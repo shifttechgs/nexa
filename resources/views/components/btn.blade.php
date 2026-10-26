@@ -15,6 +15,7 @@
 
     $variants = [
         'primary' => 'bg-nexa-green text-white hover:bg-nexa-navy',
+        'primary-on-dark' => 'bg-nexa-green text-white hover:bg-white hover:text-nexa-navy',
         'navy' => 'bg-nexa-navy text-white hover:bg-nexa-green',
         'light' => 'bg-white text-nexa-navy hover:bg-nexa-navy hover:text-white',
         'outline' => 'border border-nexa-ink/25 text-nexa-ink hover:border-nexa-ink hover:bg-nexa-ink/[0.04]',
