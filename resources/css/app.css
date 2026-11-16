@@ -285,7 +285,8 @@
 @media (min-width: 1024px) {
     .svc-stack {
         --svc-top: 112px;
-        --svc-step: 84px;
+        /* A stuck row shows its top padding (56px) plus the title's first line */
+        --svc-step: 112px;
         --svc-tail: calc((var(--svc-count, 6) - 1) * var(--svc-step));
         /* The negative margin hands the spacer's room to the next section, which slides up
            over the stacked rows instead of leaving a blank gap. */
@@ -308,9 +309,9 @@
     }
 }
 @media (min-width: 1024px) and (max-height: 860px) {
-    .svc-stack { --svc-step: 64px; }
-    .svc-row { padding-block: 1.75rem; }
-    .svc-media { aspect-ratio: 16 / 8; }
+    .svc-stack { --svc-step: 98px; }
+    .svc-stack .svc-row { padding-block: 2.5rem; }
+    .svc-media { aspect-ratio: 16 / 10; }
 }
 
 /* Arrow square: on hover the arrow slides out to the right and a second one follows in from the left */

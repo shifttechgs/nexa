@@ -176,24 +176,25 @@
                 @foreach ($services as $i => $service)
                     <a
                         href="{{ route('services.index') }}#{{ $service->slug }}"
-                        class="svc-row group grid grid-cols-1 lg:grid-cols-[2rem_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_2.5rem] gap-6 lg:gap-8 py-10 border-t border-nexa-line first:border-t-0 bg-nexa-paper"
+                        class="svc-row group grid grid-cols-1 lg:grid-cols-[2rem_minmax(0,5fr)_minmax(0,7fr)_2.5rem] gap-6 lg:gap-10 py-10 lg:py-14 border-t border-nexa-line first:border-t-0 bg-nexa-paper"
                         style="--i: {{ $i }}"
                     >
-                        <span class="font-label text-xs text-nexa-ink/45 lg:pt-2.5">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
-                        <div class="svc-media aspect-[16/10] overflow-hidden bg-nexa-navy">
+                        <span class="font-label text-xs text-nexa-ink/45 lg:pt-4">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                        <div class="svc-media aspect-[4/3] overflow-hidden bg-nexa-navy">
                             <img src="{{ $service->imageUrl() }}" {!! \App\Support\Media::dimensions($service->imagePath()) !!} alt="{{ $service->alt }}" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-active:scale-105" loading="lazy">
                         </div>
-                        <h3 class="font-display font-medium text-2xl xl:text-[1.75rem] leading-tight tracking-[-0.02em] text-nexa-ink">{{ $service->title }}</h3>
-                        <div>
-                            <p class="text-sm font-medium text-nexa-ink">Includes</p>
-                            <ul class="mt-6 space-y-2.5">
-                                @foreach (array_slice($service->includes, 0, 4) as $item)
-                                    <li class="flex items-start gap-2.5 text-base lg:text-lg font-medium text-nexa-ink/85 leading-snug">
-                                        <svg class="mt-1.5 h-3 w-3 shrink-0 text-nexa-green" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6.5 4.75 9 10 3" stroke="currentColor" stroke-width="1.6"/></svg>
-                                        {{ $item }}
-                                    </li>
-                                @endforeach
-                            </ul>
+                        {{-- Title on one line across the wide column (it's what shows when rows stack), scope beneath --}}
+                        <div class="flex flex-col">
+                            <h3 class="font-display font-medium text-3xl xl:text-[2.5rem] leading-[1.1] tracking-[-0.02em] text-nexa-ink">{{ $service->title }}</h3>
+                            {{-- Hairline, small label, plain lines: the way Q-Industrial sets its industry details --}}
+                            <div class="mt-8 lg:mt-auto border-t border-nexa-line pt-4">
+                                <p class="font-label text-xs uppercase tracking-widest text-nexa-ink/45">Includes</p>
+                                <ul class="mt-4 grid gap-x-10 gap-y-2.5 sm:grid-cols-2 text-base lg:text-lg font-medium text-nexa-ink/85 leading-snug">
+                                    @foreach (array_slice($service->includes, 0, 4) as $item)
+                                        <li>{{ $item }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
                         <span class="svc-arrow h-10 w-10 bg-nexa-green justify-self-start lg:justify-self-end" aria-hidden="true"></span>
                     </a>
