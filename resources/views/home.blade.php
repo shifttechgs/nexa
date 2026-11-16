@@ -394,7 +394,7 @@
                 <x-section-label text="Regions" />
                 <h2 class="section-title mt-6 text-nexa-ink">Where we work.</h2>
                 <p class="mt-5 text-nexa-ink/65 leading-relaxed max-w-md">
-                    Our head office is in Lubumbashi and we have an office in Johannesburg. Sites in all
+                    Our head office is in Lubumbashi, with offices in Johannesburg and Harare. Sites in all
                     four countries are supplied on the same terms, so a multi-site operation doesn't have
                     to negotiate separately in each one.
                 </p>

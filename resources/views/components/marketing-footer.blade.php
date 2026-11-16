@@ -77,6 +77,10 @@
                         <p class="text-white/40">Johannesburg</p>
                         <address class="mt-1 not-italic text-white/70">16 Caithness Road, Blairgowrie, 2194, RSA</address>
                     </div>
+                    <div>
+                        <p class="text-white/40">Harare</p>
+                        <address class="mt-1 not-italic text-white/70">393 Diamond Drive, Adylinn, Westgate, Harare, Zimbabwe</address>
+                    </div>
                 </div>
             </div>
 
