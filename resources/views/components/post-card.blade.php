@@ -6,6 +6,7 @@
     <div class="relative aspect-[16/10] overflow-hidden bg-nexa-mist">
         <img
             src="{{ $post->imageUrl() }}"
+            {!! \App\Support\Media::dimensions($post->imagePath()) !!}
             alt=""
             class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 group-active:scale-105"
             loading="lazy"

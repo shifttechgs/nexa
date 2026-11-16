@@ -5,8 +5,9 @@
     <!-- Quote form + direct contacts over the quarry photo; this section is the page header -->
     <section id="contact" class="relative pt-28 sm:pt-32 pb-24 bg-nexa-navy overflow-hidden">
         <img
-            src="{{ asset('images/photos/hero-quarry-1920.jpg') }}"
-            srcset="{{ asset('images/photos/hero-quarry-1280.jpg') }} 1280w, {{ asset('images/photos/hero-quarry-1920.jpg') }} 1920w, {{ asset('images/photos/hero-quarry-2560.jpg') }} 2560w, {{ asset('images/photos/hero-quarry-3200.jpg') }} 3200w"
+            src="{{ asset('images/photos/hero-quarry-1920.webp') }}"
+            srcset="{{ asset('images/photos/hero-quarry-1280.webp') }} 1280w, {{ asset('images/photos/hero-quarry-1920.webp') }} 1920w, {{ asset('images/photos/hero-quarry-2560.webp') }} 2560w, {{ asset('images/photos/hero-quarry-3200.webp') }} 3200w"
+            width="1920" height="1281"
             sizes="100vw"
             alt=""
             aria-hidden="true"

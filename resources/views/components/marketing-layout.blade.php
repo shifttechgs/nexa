@@ -1,8 +1,20 @@
-@props(['title' => null, 'description' => null, 'image' => 'photos/hero-quarry-1280.jpg', 'type' => 'website'])
+@props(['title' => null, 'fullTitle' => null, 'description' => null, 'image' => 'photos/hero-quarry-1280.jpg', 'type' => 'website'])
 
 @php
-    $pageTitle = $title ? $title.' - '.config('app.name') : config('app.name');
-    $pageDescription = $description ?? 'Nexa Mining and Engineering Services supplies explosives, mining chemicals, equipment, fuel and training to mines in the DRC, Zambia, Zimbabwe and South Africa.';
+    // Google shows about 60 characters of a title. Add the brand when it fits; a long
+    // title (an article headline) stands alone rather than getting cut mid-brand.
+    $brand = 'Nexa Mining & Engineering';
+    $pageTitle = $fullTitle ?? match (true) {
+        ! $title => config('app.name'),
+        mb_strlen($title.' | '.$brand) <= 60 => $title.' | '.$brand,
+        default => $title,
+    };
+    // Same idea for the snippet: about 155 characters, trimmed at a word.
+    $pageDescription = \Illuminate\Support\Str::limit(
+        $description ?? 'Explosives, mining chemicals, equipment, fuel and training for mines in the DRC, Zambia, Zimbabwe and South Africa, supplied from Lubumbashi.',
+        155,
+        preserveWords: true,
+    );
     $canonical = url()->current();
     // Social cards use the JPG: every link-preview crawler (WhatsApp, LinkedIn) can read it.
     $shareImage = asset('images/'.$image);
@@ -23,13 +35,13 @@
         <!-- Social cards (WhatsApp, LinkedIn, Facebook, X) -->
         <meta property="og:site_name" content="{{ config('app.name') }}">
         <meta property="og:type" content="{{ $type }}">
-        <meta property="og:title" content="{{ $title ?? config('app.name') }}">
+        <meta property="og:title" content="{{ $title ?? $pageTitle }}">
         <meta property="og:description" content="{{ $pageDescription }}">
         <meta property="og:url" content="{{ $canonical }}">
         <meta property="og:image" content="{{ $shareImage }}">
         <meta property="og:locale" content="en_GB">
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="{{ $title ?? config('app.name') }}">
+        <meta name="twitter:title" content="{{ $title ?? $pageTitle }}">
         <meta name="twitter:description" content="{{ $pageDescription }}">
         <meta name="twitter:image" content="{{ $shareImage }}">
 
@@ -39,15 +51,9 @@
         <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}">
         <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
 
-        <!-- Fonts: Satoshi 500 headings + Switzer body (Fontshare), Geist Mono labels (Google).
-             Fontshare drops every family after the first in a combined request, so each gets its own link. -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-        <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-        <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
-        <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <!-- Fonts are self-hosted (resources/fonts, declared in app.css). Preload the two every page shows above the fold. -->
+        <link rel="preload" href="{{ Vite::asset('resources/fonts/switzer-400.woff2') }}" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ Vite::asset('resources/fonts/satoshi-500.woff2') }}" as="font" type="font/woff2" crossorigin>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])

@@ -1,8 +1,46 @@
+@php
+    $productUrl = route('products.show', $product);
+    $categoryUrl = route('products.index', ['category' => $product->category]);
+
+    // Built here, not inline in the slot: Blade would read the '@context' key as a directive.
+    $productSchema = [
+        '@context' => 'https://schema.org',
+        '@graph' => [
+            array_filter([
+                '@type' => 'Product',
+                '@id' => $productUrl.'#product',
+                'name' => $product->name,
+                'sku' => $product->sku,
+                'category' => $product->category,
+                'description' => $product->summary,
+                'image' => asset('images/'.$product->imagePath()),
+                'url' => $productUrl,
+                'additionalProperty' => collect($product->specs)
+                    ->map(fn ($value, $label) => ['@type' => 'PropertyValue', 'name' => $label, 'value' => $value])
+                    ->values()->all() ?: null,
+            ]),
+            [
+                '@type' => 'BreadcrumbList',
+                'itemListElement' => collect([
+                    ['Home', route('home')],
+                    ['Products', route('products.index')],
+                    [$product->category, $categoryUrl],
+                    [$product->name, $productUrl],
+                ])->map(fn ($crumb, $i) => ['@type' => 'ListItem', 'position' => $i + 1, 'name' => $crumb[0], 'item' => $crumb[1]])->all(),
+            ],
+        ],
+    ];
+@endphp
+
 <x-marketing-layout
     :title="$product->name"
-    :description="$product->summary"
+    :description="$product->summary.' Product code '.$product->sku.'. Delivered to mines in the DRC and southern Africa.'"
     :image="$product->imagePath()"
 >
+    <x-slot:head>
+        <script type="application/ld+json">{!! json_encode($productSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
+    </x-slot:head>
+
     <section class="bg-nexa-navy">
         <div class="site-container pt-28 sm:pt-32 pb-14">
             <nav aria-label="Breadcrumb" class="text-sm text-white/45">
@@ -20,7 +58,7 @@
             <div class="-mt-6 grid lg:grid-cols-12 gap-10 lg:gap-16">
                 <div class="lg:col-span-7">
                     <div class="relative aspect-[4/3] overflow-hidden bg-nexa-mist">
-                        <img src="{{ $product->imageUrl() }}" alt="{{ $product->name }}" class="absolute inset-0 h-full w-full object-cover">
+                        <img src="{{ $product->imageUrl() }}" {!! \App\Support\Media::dimensions($product->imagePath()) !!} alt="{{ $product->name }}" class="absolute inset-0 h-full w-full object-cover" fetchpriority="high">
                     </div>
                 </div>
 

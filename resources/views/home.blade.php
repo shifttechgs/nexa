@@ -20,8 +20,8 @@
 @endphp
 
 <x-marketing-layout
-    :title="'Home'"
-    :description="'Nexa Mining and Engineering Services supplies explosives, mining chemicals, equipment, fuel and training to mines in the DRC, Zambia, Zimbabwe and South Africa.'"
+    full-title="Mining Supply in the DRC and Southern Africa | Nexa Mining"
+    :description="'Explosives, mining chemicals, equipment, fuel and training for mines in the DRC, Zambia, Zimbabwe and South Africa, supplied from Lubumbashi.'"
 >
     <x-slot:head>
         <script type="application/ld+json">{!! json_encode($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
@@ -89,6 +89,7 @@
                     >
                         <img
                             src="{{ \App\Support\Media::url('photos/crusher-machine.jpg') }}"
+                            {!! \App\Support\Media::dimensions('photos/crusher-machine.jpg') !!}
                             alt=""
                             class="h-full w-20 object-cover shrink-0"
                             loading="lazy"
@@ -219,7 +220,7 @@
                     >
                         <span class="font-label text-xs text-nexa-ink/45 lg:pt-2.5">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
                         <div class="svc-media aspect-[16/10] overflow-hidden bg-nexa-navy">
-                            <img src="{{ $service->imageUrl() }}" alt="{{ $service->alt }}" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-active:scale-105" loading="lazy">
+                            <img src="{{ $service->imageUrl() }}" {!! \App\Support\Media::dimensions($service->imagePath()) !!} alt="{{ $service->alt }}" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-active:scale-105" loading="lazy">
                         </div>
                         <h3 class="font-display font-medium text-2xl xl:text-[1.75rem] leading-tight tracking-[-0.02em] text-nexa-ink">{{ $service->title }}</h3>
                         <div>
@@ -321,7 +322,7 @@
                     <div class="grid gap-5 md:grid-cols-2">
                         <div class="flex flex-col gap-5">
                             <div class="relative flex-[3] min-h-[14rem] overflow-hidden bg-nexa-navy">
-                                <img src="{{ \App\Support\Media::url('photos/conveyor-aerial.jpg') }}" alt="Conveyor line seen from above at a processing plant" class="absolute inset-0 h-full w-full object-cover" loading="lazy">
+                                <img src="{{ \App\Support\Media::url('photos/conveyor-aerial.jpg') }}" {!! \App\Support\Media::dimensions('photos/conveyor-aerial.jpg') !!} alt="Conveyor line seen from above at a processing plant" class="absolute inset-0 h-full w-full object-cover" loading="lazy">
                                 <div class="absolute inset-0 bg-nexa-navy-dark/45"></div>
                                 <div class="relative h-full grid place-items-center p-6 text-center">
                                     <div>

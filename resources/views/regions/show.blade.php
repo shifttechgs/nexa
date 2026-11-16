@@ -1,6 +1,6 @@
 <x-marketing-layout
     :title="'Mining supply in '.$region->inSentence()"
-    :description="$region->intro"
+    :description="$region->metaDescription ?? $region->intro"
 >
     <section class="bg-nexa-navy">
         <div class="site-container pt-28 sm:pt-32 pb-14">

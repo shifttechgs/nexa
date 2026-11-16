@@ -20,6 +20,7 @@ class Region
         public ?array $address,
         public string $intro,
         public array $areas,
+        public ?string $metaDescription = null,
     ) {
     }
 
@@ -56,6 +57,7 @@ class Region
                 'city' => 'Lubumbashi',
                 'address' => ['No. 32 Avenue Mwange, Golf Plateau', 'Commune Annexe, Lubumbashi', 'Haut-Katanga, DRC'],
                 'intro' => 'Our head office and sales team are in Lubumbashi, within driving distance of the copper and cobalt mines of Haut-Katanga and Lualaba. Our statutory operations are governed by the OHADA Uniform Act.',
+                'metaDescription' => 'Explosives, mining chemicals, spares and fuel for copper and cobalt mines in Haut-Katanga and Lualaba, supplied from our Lubumbashi head office.',
                 'areas' => [
                     'Haut-Katanga' => 'Copper, cobalt',
                     'Lualaba (Kolwezi)' => 'Copper, cobalt',
@@ -71,6 +73,7 @@ class Region
                 'city' => null,
                 'address' => null,
                 'intro' => 'Zambian sites are supplied from Lubumbashi and billed on the same terms as our DRC accounts, so operators with mines on both sides of the Copperbelt deal with one supplier.',
+                'metaDescription' => 'Mining consumables, spares and fuel for Copperbelt and North-Western Province mines, supplied from Lubumbashi on the same terms as our DRC accounts.',
                 'areas' => [
                     'Copperbelt Province' => 'Copper, cobalt',
                     'North-Western Province' => 'Copper, gold',
@@ -85,6 +88,7 @@ class Region
                 'city' => 'Harare',
                 'address' => ['393 Diamond Drive', 'Adylinn, Westgate', 'Harare, Zimbabwe'],
                 'intro' => 'Our Harare office looks after Zimbabwean accounts, from PGM and chrome operations on the Great Dyke to gold and lithium mines, on the same supply and pricing terms as the rest of the region.',
+                'metaDescription' => 'Explosives, chemicals, spares and fuel for PGM, chrome, gold and lithium mines across Zimbabwe, handled by our Harare office.',
                 'areas' => [
                     'Great Dyke' => 'Platinum group metals, chrome',
                     'Midlands and Mashonaland' => 'Gold',
@@ -100,6 +104,7 @@ class Region
                 'city' => 'Johannesburg',
                 'address' => ['16 Caithness Road', 'Blairgowrie, 2194', 'RSA'],
                 'intro' => 'Our Johannesburg office looks after South African accounts and works alongside the Lubumbashi team on orders for sites further north.',
+                'metaDescription' => 'Supply for Bushveld, Witwatersrand and Northern Cape mines: explosives, chemicals, spares and fuel, handled by our Johannesburg office.',
                 'areas' => [
                     'Bushveld Complex' => 'Platinum group metals, chrome',
                     'Witwatersrand' => 'Gold',
