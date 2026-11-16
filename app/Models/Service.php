@@ -37,9 +37,15 @@ class Service
         ));
     }
 
+    /** Photo path relative to public/images. */
+    public function imagePath(): string
+    {
+        return 'photos/'.$this->image;
+    }
+
     public function imageUrl(): string
     {
-        return \App\Support\Media::url('photos/'.$this->image);
+        return \App\Support\Media::url($this->imagePath());
     }
 
     protected static function rows(): array

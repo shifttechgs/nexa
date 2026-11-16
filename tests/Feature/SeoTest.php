@@ -41,6 +41,31 @@ class SeoTest extends TestCase
             ->assertSee('393 Diamond Drive', false);
     }
 
+    public function test_product_page_publishes_product_and_breadcrumb_schema(): void
+    {
+        $this->get('/products/surface-bulk-emulsion')
+            ->assertOk()
+            ->assertSee('"@type":"Product"', false)
+            ->assertSee('"sku":"EXP-001"', false)
+            ->assertSee('"@type":"BreadcrumbList"', false);
+    }
+
+    public function test_titles_add_the_brand_only_when_it_fits(): void
+    {
+        $this->get('/')->assertSee('<title>Mining Supply in the DRC and Southern Africa | Nexa Mining</title>', false);
+        $this->get('/contact')->assertSee('<title>Contact | Nexa Mining &amp; Engineering</title>', false);
+        $this->get('/insights/ohada-compliance-regional-mining-suppliers')
+            ->assertSee('<title>Understanding OHADA Compliance for Regional Mining Suppliers</title>', false);
+    }
+
+    public function test_fonts_are_self_hosted(): void
+    {
+        $this->get('/')
+            ->assertSee('rel="preload"', false)
+            ->assertDontSee('fontshare.com', false)
+            ->assertDontSee('fonts.googleapis.com', false);
+    }
+
     public function test_home_page_publishes_faq_schema(): void
     {
         $this->get('/')

@@ -1,6 +1,6 @@
 <x-marketing-layout
     :title="'Services'"
-    :description="'Mining and industrial supply, operations consulting, equipment and logistics, fuel and energy, technology supply and training from Nexa Mining and Engineering Services.'"
+    :description="'Mining and industrial supply, operations consulting, equipment and logistics, fuel, technology and training for mines in the DRC and southern Africa.'"
 >
     <section class="bg-nexa-navy">
         <div class="site-container pt-28 sm:pt-32 pb-14">
@@ -71,7 +71,7 @@
             <div class="site-container grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
                 <div class="lg:col-span-6 {{ $i % 2 ? 'lg:order-2' : '' }}">
                     <div class="photo-reveal {{ $i % 2 ? 'photo-reveal--from-right' : '' }} relative aspect-[4/3] overflow-hidden bg-nexa-mist">
-                        <img src="{{ $service->imageUrl() }}" alt="{{ $service->alt }}" class="absolute inset-0 h-full w-full object-cover" loading="{{ $i === 0 ? 'eager' : 'lazy' }}">
+                        <img src="{{ $service->imageUrl() }}" {!! \App\Support\Media::dimensions($service->imagePath()) !!} alt="{{ $service->alt }}" class="absolute inset-0 h-full w-full object-cover" loading="{{ $i === 0 ? 'eager' : 'lazy' }}">
                     </div>
                 </div>
 

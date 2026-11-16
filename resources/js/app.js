@@ -2,6 +2,9 @@ import Alpine from 'alpinejs';
 import intersect from '@alpinejs/intersect';
 import collapse from '@alpinejs/collapse';
 
+// Put the font files in the Vite manifest so the layout can preload them with Vite::asset().
+import.meta.glob('../fonts/*.woff2');
+
 window.Alpine = Alpine;
 
 Alpine.plugin(intersect);

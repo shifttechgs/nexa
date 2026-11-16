@@ -48,7 +48,7 @@
         <!-- Photo, overlapping the header -->
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="-mt-16 relative aspect-[16/9] overflow-hidden bg-nexa-mist">
-                <img src="{{ $post->imageUrl() }}" alt="" class="absolute inset-0 h-full w-full object-cover">
+                <img src="{{ $post->imageUrl() }}" {!! \App\Support\Media::dimensions($post->imagePath()) !!} alt="" class="absolute inset-0 h-full w-full object-cover">
             </div>
         </div>
 
