@@ -61,10 +61,16 @@ class Product implements UrlRoutable
         return static::all()->firstWhere('slug', $slug);
     }
 
-    /** Public URL of the product photo, or its category photo. */
+    /** Product photo (or its category photo), relative to public/images. */
+    public function imagePath(): string
+    {
+        return $this->image ?? static::CATEGORY_IMAGES[$this->category] ?? 'photos/rock-strata.jpg';
+    }
+
+    /** Photo URL for the page itself (WebP where available). */
     public function imageUrl(): string
     {
-        return asset('images/'.($this->image ?? static::CATEGORY_IMAGES[$this->category] ?? 'photos/rock-strata.jpg'));
+        return \App\Support\Media::url($this->imagePath());
     }
 
     /** [name, sku, category, summary, optional image / featured / key specs shown on cards] */

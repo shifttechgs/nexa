@@ -1,6 +1,7 @@
 <x-marketing-layout
     :title="$product->name"
     :description="$product->summary"
+    :image="$product->imagePath()"
 >
     <section class="bg-nexa-navy">
         <div class="site-container pt-28 sm:pt-32 pb-14">

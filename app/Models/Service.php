@@ -39,7 +39,7 @@ class Service
 
     public function imageUrl(): string
     {
-        return asset('images/photos/'.$this->image);
+        return \App\Support\Media::url('photos/'.$this->image);
     }
 
     protected static function rows(): array

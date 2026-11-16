@@ -1,7 +1,32 @@
+@php
+    // Shown in the FAQ section and published as FAQPage structured data, so the two never drift apart.
+    $faqs = [
+        ['What countries do you deliver to?', 'Our head office is in Lubumbashi, DRC. We also deliver to sites in Zambia, Zimbabwe and South Africa, with the same supply and pricing in all four.'],
+        ['Are you OHADA compliant?', 'Yes. Our statutory operations are governed by the OHADA Uniform Act, which underpins sound corporate governance across our activities in the region.'],
+        ['What can I order from Nexa?', 'Mining and industrial consumables (including explosives, mining chemicals and safety gear), equipment and machinery, bulk fuel (diesel, petrol, jet fuel and LPG), technology and general supply, and training services. See our full product catalog for specifics.'],
+        ['How do I request a quote?', 'Fill in the quote request form below with what you need, or reach our sales team directly by email or WhatsApp. We\'ll follow up with pricing and availability.'],
+        ['Do you support operations spanning multiple countries?', 'Yes. Many of our clients run sites in more than one country, and they deal with a single Nexa account rather than a separate supplier in each.'],
+    ];
+
+    $faqSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => collect($faqs)->map(fn ($faq) => [
+            '@type' => 'Question',
+            'name' => $faq[0],
+            'acceptedAnswer' => ['@type' => 'Answer', 'text' => strip_tags($faq[1])],
+        ])->all(),
+    ];
+@endphp
+
 <x-marketing-layout
     :title="'Home'"
     :description="'Nexa Mining and Engineering Services supplies explosives, mining chemicals, equipment, fuel and training to mines in the DRC, Zambia, Zimbabwe and South Africa.'"
 >
+    <x-slot:head>
+        <script type="application/ld+json">{!! json_encode($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
+    </x-slot:head>
+
     <!-- Hero -->
     <section data-no-reveal class="relative flex flex-col overflow-hidden bg-nexa-navy min-h-screen min-h-[100svh] min-h-[100dvh]">
         <!-- Background photo (responsive sources, slow ken-burns; the wrapper carries the scroll parallax) -->
@@ -63,7 +88,7 @@
                         style="--i: 4"
                     >
                         <img
-                            src="{{ asset('images/photos/crusher-machine.jpg') }}"
+                            src="{{ \App\Support\Media::url('photos/crusher-machine.jpg') }}"
                             alt=""
                             class="h-full w-20 object-cover shrink-0"
                             loading="lazy"
@@ -296,7 +321,7 @@
                     <div class="grid gap-5 md:grid-cols-2">
                         <div class="flex flex-col gap-5">
                             <div class="relative flex-[3] min-h-[14rem] overflow-hidden bg-nexa-navy">
-                                <img src="{{ asset('images/photos/conveyor-aerial.jpg') }}" alt="Conveyor line seen from above at a processing plant" class="absolute inset-0 h-full w-full object-cover" loading="lazy">
+                                <img src="{{ \App\Support\Media::url('photos/conveyor-aerial.jpg') }}" alt="Conveyor line seen from above at a processing plant" class="absolute inset-0 h-full w-full object-cover" loading="lazy">
                                 <div class="absolute inset-0 bg-nexa-navy-dark/45"></div>
                                 <div class="relative h-full grid place-items-center p-6 text-center">
                                     <div>
@@ -445,13 +470,7 @@
                 </div>
 
                 <div class="lg:col-span-8 border-t border-nexa-line" data-reveal x-data="{ shown: false }" x-intersect.once="shown = true" :class="{ 'is-revealed': shown }">
-                    @foreach ([
-                        ['What countries do you deliver to?', 'Our head office is in Lubumbashi, DRC. We also deliver to sites in Zambia, Zimbabwe and South Africa, with the same supply and pricing in all four.'],
-                        ['Are you OHADA compliant?', 'Yes. Our statutory operations are governed by the OHADA Uniform Act, which underpins sound corporate governance across our activities in the region.'],
-                        ['What can I order from Nexa?', 'Mining and industrial consumables (including explosives, mining chemicals and safety gear), equipment and machinery, bulk fuel (diesel, petrol, jet fuel and LPG), technology and general supply, and training services. See our full product catalog for specifics.'],
-                        ['How do I request a quote?', 'Fill in the quote request form below with what you need, or reach our sales team directly by email or WhatsApp. We\'ll follow up with pricing and availability.'],
-                        ['Do you support operations spanning multiple countries?', 'Yes. Many of our clients run sites in more than one country, and they deal with a single Nexa account rather than a separate supplier in each.'],
-                    ] as $i => [$question, $answer])
+                    @foreach ($faqs as $i => [$question, $answer])
                         <div class="border-b border-nexa-line">
                             <button
                                 type="button"
