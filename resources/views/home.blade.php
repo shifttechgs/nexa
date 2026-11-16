@@ -61,16 +61,16 @@
         <div class="relative z-10 flex-1 flex items-end">
             <div class="relative w-full site-container pt-28 pb-8 sm:pb-10">
 
-                <!-- Headline: full measure, fluid size so each line holds on one row from tablet up -->
+                <!-- Headline: two set lines from tablet up; on phones the spans run inline so the browser balances the wrap -->
                 <h1 class="font-display font-medium text-[clamp(2.5rem,5vw,5.5rem)] leading-[1.04] tracking-tightest text-white text-balance">
-                    <span class="block rise-in" style="--i: 0">Keep every shift productive</span>
-                    <span class="block rise-in" style="--i: 1">with supplies that arrive on time.</span>
+                    <span class="sm:block rise-in" style="--i: 0">Keep every shift productive</span>
+                    <span class="sm:block rise-in" style="--i: 1">with supplies that arrive on time.</span>
                 </h1>
 
                 <!-- One line on what we supply, one action. The header already carries the nav. -->
-                <div class="mt-8 sm:mt-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-7">
+                <div class="mt-6 sm:mt-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-7">
                     <p class="max-w-xl text-base sm:text-lg text-white/70 leading-relaxed rise-in" style="--i: 2">
-                        Explosives, chemicals, equipment, fuel and training, supplied from Lubumbashi to mines in the DRC, Zambia, Zimbabwe and South Africa.
+                        Explosives, chemicals, equipment, fuel and training for mines in the DRC, Zambia, Zimbabwe and South Africa.
                     </p>
                     <div class="shrink-0 rise-in" style="--i: 3">
                         <x-btn :href="route('contact')" variant="primary-on-dark">Request a Quote</x-btn>
