@@ -39,13 +39,15 @@
         <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}">
         <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
 
-        <!-- Fonts: Satoshi + Switzer (Fontshare), IBM Plex Mono (Google) -->
+        <!-- Fonts: Satoshi 500 headings + Switzer body (Fontshare), Geist Mono labels (Google).
+             Fontshare drops every family after the first in a combined request, so each gets its own link. -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
         <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-        <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=switzer@400,500,600&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+        <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+        <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])

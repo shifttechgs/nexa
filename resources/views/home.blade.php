@@ -94,7 +94,7 @@
                             loading="lazy"
                         >
                         <div class="flex flex-col justify-center py-1">
-                            <p class="font-display font-semibold text-white leading-snug">Supply, fuel, logistics and training.</p>
+                            <p class="font-display font-medium text-white leading-snug">Supply, fuel, logistics and training.</p>
                             <span class="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-nexa-green">
                                 Explore Services
                                 <span class="inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
@@ -221,7 +221,7 @@
                         <div class="svc-media aspect-[16/10] overflow-hidden bg-nexa-navy">
                             <img src="{{ $service->imageUrl() }}" alt="{{ $service->alt }}" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-active:scale-105" loading="lazy">
                         </div>
-                        <h3 class="font-display font-semibold text-2xl xl:text-[1.75rem] leading-tight tracking-[-0.02em] text-nexa-ink">{{ $service->title }}</h3>
+                        <h3 class="font-display font-medium text-2xl xl:text-[1.75rem] leading-tight tracking-[-0.02em] text-nexa-ink">{{ $service->title }}</h3>
                         <div>
                             <p class="text-sm font-medium text-nexa-ink">Includes</p>
                             <ul class="mt-6 space-y-2.5">
@@ -432,7 +432,7 @@
                             @mouseenter.debounce.150ms="active = '{{ $region->code }}'"
                             :class="{ 'bg-nexa-green/5': active === '{{ $region->code }}' }"
                         >
-                            <td class="py-5 font-display font-semibold text-base sm:text-lg text-nexa-ink">
+                            <td class="py-5 font-display font-medium text-base sm:text-lg text-nexa-ink">
                                 <a href="{{ route('regions.show', $region->slug) }}" class="group-hover:text-nexa-green transition-colors">{{ $region->name }}</a>
                             </td>
                             <td class="py-5 font-mono text-xs uppercase tracking-wide text-nexa-ink/45">{{ $region->city }}</td>
@@ -479,7 +479,7 @@
                                 class="w-full flex items-center justify-between gap-6 py-6 text-left"
                                 :aria-expanded="(open === {{ $i }}).toString()"
                             >
-                                <span class="font-display font-semibold text-lg text-nexa-ink">{{ $question }}</span>
+                                <span class="font-display font-medium text-lg text-nexa-ink">{{ $question }}</span>
                                 <span class="shrink-0 text-nexa-green text-xl font-mono" x-text="open === {{ $i }} ? '−' : '+'"></span>
                             </button>
                             <div x-show="open === {{ $i }}" x-collapse.duration.400ms x-cloak>
