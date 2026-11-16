@@ -1,6 +1,6 @@
 <x-marketing-layout
     :title="'Contact'"
-    :description="'Request a quote from Nexa Mining and Engineering Services, or contact our sales team in Lubumbashi and Johannesburg.'"
+    :description="'Request a quote from Nexa Mining and Engineering Services, or contact our sales team in Lubumbashi, Johannesburg and Harare.'"
 >
     <!-- Quote form + direct contacts over the quarry photo; this section is the page header -->
     <section id="contact" class="relative pt-28 sm:pt-32 pb-24 bg-nexa-navy overflow-hidden">
@@ -47,6 +47,10 @@
                         <div class="flex items-center justify-between gap-6 py-4">
                             <dt class="font-mono text-[11px] uppercase tracking-widest text-white/35 shrink-0">South Africa Office</dt>
                             <dd class="font-semibold text-white text-right">16 Caithness Road, Blairgowrie, 2194, RSA</dd>
+                        </div>
+                        <div class="flex items-center justify-between gap-6 py-4">
+                            <dt class="font-mono text-[11px] uppercase tracking-widest text-white/35 shrink-0">Zimbabwe Office</dt>
+                            <dd class="font-semibold text-white text-right">393 Diamond Drive, Adylinn, Westgate, Harare, Zimbabwe</dd>
                         </div>
                     </dl>
                 </div>

@@ -45,7 +45,7 @@
             </div>
             <div class="py-5">
                 <dt class="{{ $c['label'] }}">Offices</dt>
-                <dd class="mt-1 {{ $c['muted'] }}">Lubumbashi, DRC &middot; Johannesburg, RSA</dd>
+                <dd class="mt-1 {{ $c['muted'] }}">Lubumbashi, DRC &middot; Johannesburg, RSA &middot; Harare, Zimbabwe</dd>
             </div>
         </dl>
     </div>
