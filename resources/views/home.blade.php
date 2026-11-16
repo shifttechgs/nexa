@@ -67,62 +67,23 @@
                     <span class="block rise-in" style="--i: 1">with supplies that arrive on time.</span>
                 </h1>
 
-                <!-- Supporting row on a 12-col grid: copy + action share the headline's left edge | service card closes the right edge -->
-                <div class="mt-8 sm:mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:items-end">
-                    <div class="lg:col-span-7">
-                        <p class="max-w-2xl text-base sm:text-lg text-white/70 leading-relaxed rise-in" style="--i: 2">
-                            Supplied from Lubumbashi to sites in the DRC, Zambia, Zimbabwe and South Africa, along with equipment, technology and training.
-                        </p>
-                        <div class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4 rise-in" style="--i: 3">
-                            <x-btn :href="route('contact')" variant="primary-on-dark">Request a Quote</x-btn>
-                            <a href="#services" class="group inline-flex items-center gap-2 text-sm font-semibold text-white/80 hover:text-white transition-colors">
-                                <span class="border-b border-white/30 group-hover:border-white pb-0.5 transition-colors">Our services</span>
-                            </a>
-                        </div>
+                <!-- One line on what we supply, one action. The header already carries the nav. -->
+                <div class="mt-8 sm:mt-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-7">
+                    <p class="max-w-xl text-base sm:text-lg text-white/70 leading-relaxed rise-in" style="--i: 2">
+                        Explosives, chemicals, equipment, fuel and training, supplied from Lubumbashi to mines in the DRC, Zambia, Zimbabwe and South Africa.
+                    </p>
+                    <div class="shrink-0 rise-in" style="--i: 3">
+                        <x-btn :href="route('contact')" variant="primary-on-dark">Request a Quote</x-btn>
                     </div>
-
-                    <!-- Explore Services card -->
-                    <a
-                        href="#services"
-                        class="hidden lg:flex lg:col-span-4 lg:col-start-9 lg:justify-self-end w-full max-w-xs items-stretch gap-3 bg-white/10 backdrop-blur-sm ring-1 ring-white/15 p-3 rise-in hover:bg-white/15 transition-colors group"
-                        style="--i: 4"
-                    >
-                        <img
-                            src="{{ \App\Support\Media::url('photos/crusher-machine.jpg') }}"
-                            {!! \App\Support\Media::dimensions('photos/crusher-machine.jpg') !!}
-                            alt=""
-                            class="h-full w-20 object-cover shrink-0"
-                            loading="lazy"
-                        >
-                        <div class="flex flex-col justify-center py-1">
-                            <p class="font-display font-medium text-white leading-snug">Supply, fuel, logistics and training.</p>
-                            <span class="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-nexa-green">
-                                Explore Services
-                                <span class="inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-                            </span>
-                        </div>
-                    </a>
                 </div>
 
                 <!-- Divider -->
-                <div class="hero-rule mt-10 sm:mt-12 rise-in" style="--i: 5" aria-hidden="true"></div>
+                <div class="hero-rule mt-10 sm:mt-14 rise-in" style="--i: 4" aria-hidden="true"></div>
 
-                <!-- Trust row: compliance checks + scroll cue -->
-                <div class="mt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rise-in" style="--i: 6">
-                    <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
-                        @foreach (['OHADA Compliant', 'Lubumbashi Head Office', 'Part of Nexa Holding Group'] as $point)
-                            <span class="inline-flex items-center gap-2 text-sm text-white/70">
-                                <svg viewBox="0 0 20 20" class="h-4 w-4 text-nexa-green shrink-0" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                    <circle cx="10" cy="10" r="8"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m6.5 10 2.3 2.3L14 7.8"/>
-                                </svg>
-                                {{ $point }}
-                            </span>
-                        @endforeach
-                    </div>
-
-                    <!-- Scroll cue -->
-                    <a href="#commitment" class="group hidden sm:inline-flex items-center gap-3 shrink-0 font-mono text-[11px] uppercase tracking-widest text-white/55 hover:text-white transition-colors">
+                <!-- Footnote row: credentials as quiet labels + scroll cue -->
+                <div class="mt-5 flex items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-widest text-white/55 rise-in" style="--i: 5">
+                    <p>OHADA compliant <span class="mx-2 text-white/25">/</span> Part of Nexa Holding Group</p>
+                    <a href="#commitment" class="group hidden sm:inline-flex items-center gap-3 shrink-0 hover:text-white transition-colors">
                         Scroll
                         <span class="scroll-cue-line relative block h-10 w-px overflow-hidden bg-white/20" aria-hidden="true"></span>
                     </a>
