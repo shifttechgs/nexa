@@ -18,9 +18,9 @@
         .pin-pulse { animation: pin-pulse 1.6s ease-out infinite; transform-origin: center; }
 
         .pin-label {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Geist Mono', monospace;
             font-size: 22px;
-            font-weight: 600;
+            font-weight: 500;
             fill: #0B2340;
             stroke: #FFFFFF;
             stroke-width: 6px;

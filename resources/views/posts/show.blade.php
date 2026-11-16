@@ -1,30 +1,28 @@
 @php
     $url = route('posts.show', $post);
+
+    $articleSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Article',
+        'headline' => $post->title,
+        'description' => $post->excerpt,
+        'image' => asset('images/'.$post->imagePath()),
+        'datePublished' => $post->published_at->toIso8601String(),
+        'articleSection' => $post->category,
+        'mainEntityOfPage' => $url,
+        'publisher' => ['@id' => url('/').'#organization'],
+    ];
 @endphp
 
 <x-marketing-layout
     :title="$post->title"
     :description="$post->excerpt"
+    :image="$post->imagePath()"
+    type="article"
 >
     <x-slot:head>
-        <meta property="og:type" content="article">
-        <meta property="og:title" content="{{ $post->title }}">
-        <meta property="og:description" content="{{ $post->excerpt }}">
-        <meta property="og:url" content="{{ $url }}">
-        <meta property="og:image" content="{{ $post->imageUrl() }}">
         <meta property="article:published_time" content="{{ $post->published_at->toIso8601String() }}">
-        <meta name="twitter:card" content="summary_large_image">
-        <script type="application/ld+json">{!! json_encode([
-            '@context' => 'https://schema.org',
-            '@type' => 'Article',
-            'headline' => $post->title,
-            'description' => $post->excerpt,
-            'image' => $post->imageUrl(),
-            'datePublished' => $post->published_at->toIso8601String(),
-            'articleSection' => $post->category,
-            'mainEntityOfPage' => $url,
-            'publisher' => ['@type' => 'Organization', 'name' => 'Nexa Mining and Engineering Services'],
-        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
+        <script type="application/ld+json">{!! json_encode($articleSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
     </x-slot:head>
 
     <!-- Header -->

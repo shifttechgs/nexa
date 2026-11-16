@@ -100,15 +100,21 @@ MD,
         return static::all()->firstWhere('slug', $slug);
     }
 
-    /** Category photo for the article card and header. */
-    public function imageUrl(): string
+    /** Category photo for the article card and header, relative to public/images. */
+    public function imagePath(): string
     {
-        return asset('images/photos/'.match ($this->category) {
+        return 'photos/'.match ($this->category) {
             'Compliance' => 'rock-strata.jpg',
             'Fuel & Energy' => 'chemical-drums.jpg',
             'Training & Safety' => 'safety-ppe.jpg',
             default => 'hero-excavator.jpg',
-        });
+        };
+    }
+
+    /** Photo URL for the page itself (WebP where available). */
+    public function imageUrl(): string
+    {
+        return \App\Support\Media::url($this->imagePath());
     }
 
     /** Body rendered from Markdown (raw HTML escaped), with an id on each h2 so sections can be linked to. */

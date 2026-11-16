@@ -820,7 +820,7 @@ a.manifest-row:hover .manifest-go { background: #C27A3E; border-color: #C27A3E; 
     padding: 0.4rem 0.75rem;
     font-family: theme('fontFamily.label');
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: #93501F;

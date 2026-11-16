@@ -12,11 +12,11 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                // Satoshi (display) + Switzer (body) from Fontshare, IBM Plex Mono for labels/mono.
+                // Satoshi (display) + Switzer (body) from Fontshare, Geist Mono for labels/mono.
                 sans: ['Switzer', 'Inter', ...defaultTheme.fontFamily.sans],
                 display: ['Satoshi', 'Switzer', ...defaultTheme.fontFamily.sans],
-                label: ['"IBM Plex Mono"', ...defaultTheme.fontFamily.mono],
-                mono: ['"IBM Plex Mono"', ...defaultTheme.fontFamily.mono],
+                label: ['"Geist Mono"', ...defaultTheme.fontFamily.mono],
+                mono: ['"Geist Mono"', ...defaultTheme.fontFamily.mono],
             },
             colors: {
                 // 60 / 20 / 10 brand system, taken from the Nexa logo:

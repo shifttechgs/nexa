@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuoteRequestController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SitemapController;
 use App\Models\Testimonial;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,9 @@ Route::get('/insights',[PostController::class, 'index'])->name('posts.index');
 Route::get('/insights/{post}', [PostController::class, 'show'])->name('posts.show');
 
 Route::view('/contact', 'contact')->name('contact');
+
+Route::get('/sitemap.xml', [SitemapController::class, 'sitemap'])->name('sitemap');
+Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots');
 
 Route::post('/quote-requests',[QuoteRequestController::class, 'store'])->middleware('throttle:5,1')->name('quote-requests.store');
 

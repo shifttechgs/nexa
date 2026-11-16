@@ -1,4 +1,12 @@
-@props(['title' => null, 'description' => null])
+@props(['title' => null, 'description' => null, 'image' => 'photos/hero-quarry-1280.jpg', 'type' => 'website'])
+
+@php
+    $pageTitle = $title ? $title.' - '.config('app.name') : config('app.name');
+    $pageDescription = $description ?? 'Nexa Mining and Engineering Services supplies explosives, mining chemicals, equipment, fuel and training to mines in the DRC, Zambia, Zimbabwe and South Africa.';
+    $canonical = url()->current();
+    // Social cards use the JPG: every link-preview crawler (WhatsApp, LinkedIn) can read it.
+    $shareImage = asset('images/'.$image);
+@endphp
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -6,21 +14,40 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="description" content="{{ $description ?? 'Nexa Mining and Engineering Services supplies explosives, mining chemicals, equipment, fuel and training to mines in the DRC, Zambia, Zimbabwe and South Africa.' }}">
+        <meta name="description" content="{{ $pageDescription }}">
 
-        <title>{{ $title ? $title.' - '.config('app.name') : config('app.name') }}</title>
+        <title>{{ $pageTitle }}</title>
+
+        <link rel="canonical" href="{{ $canonical }}">
+
+        <!-- Social cards (WhatsApp, LinkedIn, Facebook, X) -->
+        <meta property="og:site_name" content="{{ config('app.name') }}">
+        <meta property="og:type" content="{{ $type }}">
+        <meta property="og:title" content="{{ $title ?? config('app.name') }}">
+        <meta property="og:description" content="{{ $pageDescription }}">
+        <meta property="og:url" content="{{ $canonical }}">
+        <meta property="og:image" content="{{ $shareImage }}">
+        <meta property="og:locale" content="en_GB">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ $title ?? config('app.name') }}">
+        <meta name="twitter:description" content="{{ $pageDescription }}">
+        <meta name="twitter:image" content="{{ $shareImage }}">
+
+        @include('partials.organization-schema')
 
         <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}">
         <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
 
-        <!-- Fonts: Satoshi + Switzer (Fontshare), IBM Plex Mono (Google) -->
+        <!-- Fonts: Satoshi 500 headings + Switzer body (Fontshare), Geist Mono labels (Google).
+             Fontshare drops every family after the first in a combined request, so each gets its own link. -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
         <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-        <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=switzer@400,500,600&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+        <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+        <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])

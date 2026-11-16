@@ -18,9 +18,9 @@ class RegionsTest extends TestCase
 
     public function test_region_without_office_says_where_it_is_supplied_from(): void
     {
-        $this->get('/regions/zimbabwe')
+        $this->get('/regions/zambia')
             ->assertOk()
-            ->assertSee('Great Dyke')
+            ->assertSee('Copperbelt Province')
             ->assertSee('Supplied from');
     }
 
